@@ -1,0 +1,69 @@
+<h1 id="using-git">Using Git</h1>
+<p>Hey there,</p>
+<p>Been so long since posted something here. Well, as you guessed I was busy with stuffs, you know learning and working. So today I am going to discuss with you guys a very important tool that all developers must use. In fact, why only devs! Anyone who is working on anything that is long term and requires you change a set of files a number of times should use this amazing tool.</p>
+<p>And its called <strong>Git</strong>.</p>
+<p>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. When I say &quot;version control system&quot;, it means a system that tracks and documents (using commit messages) the progress of your project, all the changes that you make.</p>
+<p>Git was created by Linus Torvalds (the man who created linux) in 2005 for development of the Linux kernel, with other kernel developers contributing to its initial development. Its current maintainer since 2005 is Junio Hamano.</p>
+<p>And though there are a lot of tutorials to learn git like <a href="http://rogerdudler.github.io/git-guide/">this simple one</a> and <a href="https://www.tutorialspoint.com/git/">this detailed one</a></p>
+<p>But what you will get here, is my experience in git on linux i.e what all git commands I have ever used. So they will be a kind indication as to what commands you will mostly need while working with git. Of course, it would be dynamic post which will be propostionate with my experience in git.</p>
+<p>So lets start!</p>
+<h2 id="creating-a-repo">Creating a Repo</h2>
+<ol style="list-style-type: decimal">
+<li>Create a new directory (using mkdir).</li>
+<li>Run the following to create a new git repository:</li>
+</ol>
+<p><strong><code>git init</code></strong></p>
+<h2 id="the-workflow">The Workflow</h2>
+<ul>
+<li>Your local repository consists of three &quot;trees&quot; maintained by git.</li>
+<li>The first one is your Working Directory which holds the actual files.</li>
+<li>The second one is the Index which acts as a staging area.</li>
+<li>And finally the HEAD which points to the last commit you've made.</li>
+</ul>
+<div class="figure">
+<img src="http://rogerdudler.github.io/git-guide/img/trees.png" title="Git Workflow" alt="Git Workflow" />
+<p class="caption">Git Workflow</p>
+</div>
+<h2 id="tracking-changes">Tracking Changes</h2>
+<ul>
+<li>Now if you want to see what changes you have made with regards to the files, then you run:</li>
+</ul>
+<p><strong><code>git status</code></strong></p>
+<h2 id="proposing-changes">Proposing Changes</h2>
+<ul>
+<li>You can propose changes (add it to the Index) using:</li>
+</ul>
+<p><strong><code>git add &lt;filename&gt;</code></strong></p>
+<p><strong><code>git add *</code></strong></p>
+<h2 id="finalising-changes">Finalising Changes</h2>
+<ul>
+<li>To actually commit these changes use:</li>
+</ul>
+<p><strong><code>git commit -m &quot;Commit message&quot;</code></strong></p>
+<ul>
+<li>Now the file is committed to the HEAD</li>
+<li>To write and additional description add another -m flag like:</li>
+</ul>
+<p><strong><code>git commit -m &quot;Commit message&quot; -m &quot;Additonal Description</code></strong></p>
+<ul>
+<li>We write additional description seperately, because commit messages should be short and precise.</li>
+</ul>
+<h2 id="viewing-changes">Viewing Changes</h2>
+<ul>
+<li>In its simplest form, you can study repository history using:</li>
+</ul>
+<p><strong><code>git log</code></strong></p>
+<ul>
+<li>You can add a lot of parameters to make the log look like what you want.</li>
+</ul>
+<h2 id="sending-files-to-remote-server">Sending files to remote server</h2>
+<ul>
+<li>To send files to a remote server :</li>
+</ul>
+<p><strong><code>git push &lt;remote-url&gt; &lt;branch&gt;</code></strong></p>
+<h2 id="retrieving-files-from-remote-server">Retrieving files from remote server</h2>
+<ul>
+<li>To retrieve files from a remote server and merge with local files:</li>
+</ul>
+<p><strong><code>git pull &lt;branch&gt;</code></strong></p>
+<p>So this was it for now. Thats how much I have used till the date this post was published. As and when I learn and use new commands in git, I will update them here. Feel free to leave new and useful git commands in comments or ask for any help regarding git.</p>
