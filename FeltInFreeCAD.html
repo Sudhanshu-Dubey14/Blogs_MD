@@ -1,0 +1,31 @@
+<p>As my first contribution to a large open-source project with any users, I am attempting to integrate FElt solver in FreeCAD. So my upcoming blogs are going to be about this whole process. As an introductory blog, here I would like to discuss the background info so that we are all caught up and are on the same page. So lets start!!!</p>
+<h2 id="freecad">FreeCAD</h2>
+<p>&quot;FreeCAD is an open-source parametric 3D modeler made primarily to design real-life objects of any size. Parametric modeling allows you to easily modify your design by going back into your model history and changing its parameters. FreeCAD equips you with all the right tools for your needs. You get modern <strong>Finite Element Analysis (FEA) tools</strong>, experimental CFD, BIM, Geodata workbenches, Path workbench, a robot simulation module that allows you to study robot movements and many more features. FreeCAD really is a Swiss Army knife of general-purpose engineering toolkits.&quot; The above content was taken from FreeCAD's <a href="https://www.freecadweb.org/">official website</a>.</p>
+<p>Our main concern will be the Finite Element Analysis tools that FreeCAD provides through its Finite Element Methods (FEM) workbench.</p>
+<h2 id="felt">FElt</h2>
+<p><a href="http://felt.sourceforge.net/">FElt</a> is an open source system for finite element analysis.</p>
+<p>Its a quite old software. The original developers (Jason Gobat and Darren Atkinson) left the Felt project after releasing from 3.02 to 3.05 (as per the <a href="https://github.com/Sudhanshu-Dubey14/felt/blob/experiment/CHANGELOG">Changelog</a>), and they had the copyright till 2005 (as per the <a href="https://github.com/Sudhanshu-Dubey14/Burlap/blob/master/doc/felt.pdf">User Guide</a>). A developer <a href="https://github.com/pvossos">pvossos</a> picked up the Felt code in 2000 and started working on it. He has releases till 3.07 (same as on <a href="https://sourceforge.net/projects/felt/files/FElt/">sourceforge</a>) and his last commit was from 2011. He also had a branch in which he was preparing for the 3.08 release but had to stop his work due to personal reasons.</p>
+<p>What I worked on (along with my friend <a href="https://github.com/AkMecha">Alok</a> was a fork of pvossos repo by <a href="https://github.com/inderpreetsingh">inderpreetsingh</a>. When I picked up felt, it had errors in it because of the changes in C++ that had happened over time. I removed all the errors (took me a considerable time) and had to remove <a href="https://github.com/Sudhanshu-Dubey14/Burlap">Burlap</a> (an octave-like mathematical environment for felt) and Velvet (a GUI for felt) so that <a href="https://github.com/Sudhanshu-Dubey14/felt">felt</a> could compile on the latest linux system with latest c++.</p>
+<h2 id="fem">FEM</h2>
+<ul>
+<li>The finite element method (FEM), is a numerical method for solving problems of engineering and mathematical physics.</li>
+<li>Typical problem areas of interest include structural analysis, heat transfer, fluid flow, mass transport, and electromagnetic potential.</li>
+<li>The analytical solution of these problems generally require the solution to boundary value problems for partial differential equations.</li>
+<li>To solve the problem, it subdivides a large system into smaller, simpler parts that are called finite elements.</li>
+<li>The simple equations that model these finite elements are then assembled into a larger system of equations that models the entire problem.</li>
+<li>FEM then uses variational methods from the calculus of variations to approximate a solution by minimizing an associated error function.</li>
+<li>Studying or analyzing a phenomenon with FEM is often referred to as finite element analysis (FEA).</li>
+</ul>
+<h2 id="fea-using-freecad">FEA using FreeCAD</h2>
+<p>The steps to carry out a FE analysis are:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Preprocessing</strong>: setting up the analysis problem.</li>
+</ol>
+<ul>
+<li><em>Modeling the geometry</em>: creating the geometry with FreeCAD, or importing it from a different application.</li>
+<li><em>Creating an Analysis</em>. * Creating a finite element Mesh for the geometrical model. + Adding Constraints such as loads and fixed supports to the model. * Adding a Material to the analysis model.</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Solving</strong>: solving a system of equations using an external solver from within FreeCAD.</li>
+<li><strong>Postprocessing</strong>: visualizing the analysis Results from within FreeCAD.</li>
+</ol>
