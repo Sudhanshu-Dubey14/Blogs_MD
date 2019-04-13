@@ -1,0 +1,20 @@
+<h1 id="steps-to-include-a-new-solver-in-freecad">Steps to Include a New Solver in FreeCAD</h1>
+<p>In my <a href="https://hacksd.wordpress.com/2019/04/04/felt-integration-in-freecad/">last post</a>, we looked at the backstory of my current project which is inclusion of the FElt FEM solver in FreeCAD. But before actually doing anything, we should know &quot;how to do it&quot; i.e the algorithm of that process. So what we will discuss today is the step-by-step procedure of including a new solver in FreeCAD.</p>
+<p>I made this guide after studying the <a href="https://github.com/berndhahnebach/FreeCAD_bhb/commits/femoofem">commits</a> made by <a href="https://github.com/berndhahnebach">Bernd</a> for including the OOFEM solver in FreeCAD. I can't gaurantee about the correctness of this guide right now as I haven't actually performed these steps, myself yet. But surely, as I go about doing them, I will update this blog with the most accurate descriptions of each steps and add what ateps I may need to take to completly integrate FElt in FreeCAD.</p>
+<p>So the steps are as follow:</p>
+<ol style="list-style-type: decimal">
+<li>Make <strong>init</strong>.py and solver.py.</li>
+<li>Register the new files in Fem.ObjectsFem.py, Fem.CMakeLists.txt, Fem.FemSolver.settings.py, and Fem.Femtest.testobject.py.</li>
+<li>Create writer.py (with sample input file)</li>
+<li>Create tasks.py</li>
+<li>Add solver command in GUI.</li>
+<li>Divide writer.py into seperate methods/functions and description of each function. (an example mesh was also added in writer.py)</li>
+<li>Create mesh exporter file (in Fem.feminout/ ) [You only need to perform this step if your solver's mesh format in unknown to FreeCAD FEM]</li>
+<li>Add mesh writing ability in writer.py and tasks.py (the example mesh is now removed)</li>
+<li>Add the ability in writer.py to use solver specific input file instead of sample input file.</li>
+<li>Add domain and cross-section in writer.py and tasks.py.</li>
+<li>Add material, component size, constraints etc in writer.py.</li>
+<li>Add GUI settings of solver (in Fem.Gui.*)</li>
+<li>Add test files (in Fem.femtest.testfiles.<solver>.*)</li>
+</ol>
+<p>So as I said, there will be more additions and changes in this blog, so stay tuned!</p>
