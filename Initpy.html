@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="getting-to-know-the-__init__.py-file">Getting to know the <code>__init__.py</code> File</h1>
+<p>So in our <a href="https://hacksd.wordpress.com/2019/04/13/steps-to-include-a-new-solver-in-freecad/">last discussion</a> we talked about the steps that should be taken to include a new solver in FreeCAD. If you remember, a part of the first step was to create __init__.py file. Now what is this file? And what does it do? Today we will seek answers to these questions.</p>
+<h3 id="what-is-__init__.py-file">What is <code>__init__.py</code> file?</h3>
+<p>From <a href="https://docs.python.org/3/tutorial/modules.html#packages">python documentation</a> &quot;The <code>__init__.py</code> files are required to make Python treat directories containing the file as packages.&quot; In simpler words, if you want to import your directories as python packages and the files in them as python modules, then you need to have an <code>__init__.py</code> in that directory. It kind of works like specifying <code>package &lt;package_name&gt;</code> inside a java file which is within a directory called package_name. Only that, this seems like a simpler and cleaner approach compared to the java one. In the OOPS terms, I would describe <code>__init__.py</code> as the &quot;constructor&quot; of the package. Why? We will see.</p>
+<h3 id="what-to-put-in-__init__.py-file">What to put in <code>__init__.py</code> file?</h3>
+<p>In the easiest way, this file can be kept empty. I am going to keep it empty too since I have nothing in particular to put here. My only purpose for creating this file is to make python treat my directory as a package since the files (modules) in it need to be imported elsewhere.</p>
+<p>But there is much more that you can do with the <code>__init__.py</code> file. A quick about this file that I found is <a href="https://pcarleton.com/2016/09/06/python-init/">this one</a>.</p>
+</body>
+</html>
