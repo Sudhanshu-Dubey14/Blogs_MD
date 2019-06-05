@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-1-of-summer-internship">Day 1 of Summer Internship</h1>
+<p><em>Date: June 4th, 2019</em></p>
+<p>Hey guys! From today onwards, I started my 6 weeks Industrial Training at <a href="http://www.nebero.com/">Nebero Systems</a> in the field of Networking and Linux.</p>
+<h3 id="making-new-friends">Making new Friends</h3>
+<p>It was the first day, and as one would expect it was one of interaction. I made new friends today, 2 in fact. They are new employees here and it was their 5th day. Since both my and their mentors were absent today, we sat down, discussed and exchanged ideas and ideologies. They were both network engineers, CCNA certified, and had job experience of 1-2 years. Since all of us are engineers (they completed their graduation in 2017 and 18 respectively), we shared some common experiences. The task given to them was to learn about Linux and how to do networking in Linux since the company uses Linux, Debian in particular, as their servers. They were unfamiliar with Linux and were using the internet to learn its basics. Since I have around 1-year experience in using Linux, I helped them get the basics of it including the command line and some commands.</p>
+<p>It was a nice experience getting to know people of my age with much more life experience than me. I am planning to stick around with them and learn as much as possible from their life and technical experience.</p>
+<h3 id="some-tech-talks">Some Tech Talks</h3>
+<p>Halfway around the day, a senior employee visited us and talked with us about the company and their products. Some of the new and important topics/concepts mentioned in that discussion were:</p>
+<h4 id="iptables">iptables</h4>
+<p>From what I learned from that discussion, iptables are used to define rules in networking that which IP address's which request should be directed where. It is particularly used in firewalls.</p>
+<p>From <code>man iptables</code> we get:</p>
+<p>&quot;Iptables and ip6tables are used to set up, maintain, and inspect the tables of IPv4 and IPv6 packet filter rules in the Linux kernel. Several different tables may be defined. Each table contains a number of built-in chains and may also contain user-defined chains.</p>
+<p>Each chain is a list of rules which can match a set of packets. Each rule specifies what to do with a packet that matches. This is called a 'target', which may be a jump to a user-defined chain in the same table.&quot;</p>
+<p>Since I have never worked on iptables, I can't go in details. But here are a few guides from where you can (and possibly I will) use <a href="https://www.tecmint.com/basic-guide-on-iptables-linux-firewall-tips-commands/">techmint's</a>, <a href="https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands">digital ocean's</a> and <a href="https://www.crybit.com/what-is-iptables-in-linux/">crybit's</a>.</p>
+<h4 id="trunk-ports-vs-access-port">Trunk ports vs Access Port</h4>
+<ul>
+<li><p><strong>Trunk Port</strong>: From what I learned from the discussion, and from <a href="https://serverfault.com/questions/188350/how-do-vlans-work?rq=1">this link</a>, trunk ports are used in VLANs. What happens is, when you create VLANS in two switches and want the switches to &quot;know about&quot; the VLANs in each other, you connect them through trunk ports. What trunk port does is that it appends a &quot;VLAN tag&quot; to each frame that comes from a particular VLAN so that the other switch would know that it is meant to go to a particular VLAN. Simply, a trunk port (or “tagged port” in the non Cisco world) is a switch port which carries traffic for multiple VLANs.</p></li>
+<li><p><strong>Access Ports</strong>: These are your &quot;normal&quot; ports of a switch. You use these ports to connect your end points to the switch. Each access port can be in a single VLAN. Simply, an access port (or “untagged port” in the non Cisco world) is a switch port which carries traffic for only one VLAN.</p></li>
+<li><p><strong>Native VLAN</strong>: The Native VLAN is simply the one VLAN which traverses a Trunk port without a VLAN tag. <a href="https://www.practicalnetworking.net/stand-alone/what-is-the-native-vlan/">More here</a></p></li>
+</ul>
+<h3 id="stacking-of-switches">Stacking of switches</h3>
+<p>Basically, it is a logical merging of multiple switches. They are physically different, but they all have same IP address and the whole stack can be managed by the master switch. More about stacking of switches and its benefits can be found <a href="https://excitingip.com/1297/stacking-network-switches-lan/">here</a>.</p>
+<h3 id="dnat-and-snat">DNAT and SNAT</h3>
+<ul>
+<li><p><strong>SNAT</strong>: Source Network Address Translation, its a technique that changes the IP address (private one) of packets going out of LAN to the WAN so the server having a public IP can properly contact the host having a private IP.</p></li>
+<li><p><strong>DNAT</strong>: Destination Network Address Translation, its a technique that does similar work like SNAT but for the servers. It maps the private IP of the server with a public IP so that the server is publicly accessible.</p></li>
+</ul>
+<p>More on SNAT and DNAT <a href="https://www.quora.com/What-is-difference-between-SNAT-and-DNAT">here</a>.</p>
+<h3 id="dmz">DMZ</h3>
+<p>DeMilitarized Zone is basically a network (logical or physical) that separates the public and private parts of a LAN. It is basically used for security purpose. <a href="https://www.lifewire.com/demilitarized-zone-computer-networking-816407">More on DMZ</a>.</p>
+</body>
+</html>
