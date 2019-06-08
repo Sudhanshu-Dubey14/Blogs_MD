@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-4-of-summer-internship">Day 4 of Summer Internship</h1>
+<p><em>Date: June 7th, 2019</em></p>
+<p>Today I was busy with other stuff at the office and was not able to do much of my project related work. Since my colleagues' task is to learn about Linux system administration, we were trying to install Ubuntu in their system. As a safety measure against possible loss of data, we tried to <a href="https://hacksd.wordpress.com/2019/06/07/windows-to-linux-file-transfer-over-lan/">transfer data from his Windows to my Linux system</a> but in vain. Then transfer the data to an HDD, we finally installed Ubuntu in his system (with some difficulties due to partitioning problems).</p>
+<h3 id="understanding-and-commenting">Understanding and Commenting</h3>
+<p>I took my basic code from <a href="https://appliedmachinelearning.blog/2017/01/23/email-spam-filter-python-scikit-learn/">this blog</a>. I read and understood the whole and provided useful comments wherever I thought was neccessary.</p>
+<p>Some of the new python methods about which I got to learn today were:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://docs.python.org/3/library/os.path.html?highlight=os%20path%20join#os.path.join">os.path.join()</a></li>
+<li><a href="https://docs.python.org/3/library/functions.html?highlight=enumerate#enumerate">enumerate()</a></li>
+</ol>
+<h3 id="executing-the-code">Executing the Code</h3>
+<p>After understanding the code to some extent, I executed it and got the following error:</p>
+<p><code>UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc4 in position 16: invalid continuation byte</code></p>
+<p>What it meant was that the training set that I was using contained such mails which python was not able to decode using <a href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a>.</p>
+<p>This could simply imply that the mails were not encoded using UTF-8 in the first place. But searching with the error message did not resulted in much fruitful solutions so I consulted my head. According to him, it was completely ok for the emails to be encoded in any format. It is our code that should be flexible enough to deal with all the formats. We need to ensure maximum customer convenience as a software company. And yeah, he had a point.</p>
+<p>I also asked him for a local server so that we can work collaboratively on the project, since I am not allowed to put the code on Github.</p>
+<p>While waiting for the credentials, I wrote the <a href="https://hacksd.wordpress.com/2019/06/07/windows-to-linux-file-transfer-over-lan/">blog</a> on our attempt to transfer the data and played around with <a href="https://www.howtoforge.com/linux-watch-command/">watch</a> and <a href="https://www.poftut.com/linux-tmux-tutorial-command-examples/">tmux</a> to create something like:</p>
+<div class="figure">
+<img src="fun.png" />
+
+</div>
+<p>But don't take these commands lightly, they are extremely useful ones. And so, another day of my training ended</p>
+</body>
+</html>
