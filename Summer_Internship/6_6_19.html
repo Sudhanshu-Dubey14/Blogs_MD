@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-3-of-summer-internship">Day 3 of Summer Internship</h1>
+<p><em>Date: June 6th, 2019</em></p>
+<p>Today was a rather interesting day. Right after entering the office (I was late though) I went to meet my head (as I had planned <a href="https://hacksd.wordpress.com/2019/06/05/day-2-of-summer-internship/">yesterday</a> and he had planned a very fascinating project for me.</p>
+<p>A <strong>Spam-Email Filter using Machine Learning!!!</strong></p>
+<p>Nebero provides mail-servers to its clients. So its better if they have their own spam-detection service. And what better way to built it than using Machine Learning.</p>
+<p>So my head sent me this <a href="https://medium.com/analytics-vidhya/building-a-spam-filter-from-scratch-using-machine-learning-fc58b178ea56">link</a> to learn more about the project. This link used GNU Octave to implement the project. I read that post and found more articles about building a spam-filter using ML. A <a href="https://www.booleanworld.com/building-spam-filter-using-machine-learning/">node.js implementation</a> and a <a href="https://appliedmachinelearning.blog/2017/01/23/email-spam-filter-python-scikit-learn/">python one</a>.</p>
+<p>To summarize the basic idea behind the spam-filter, we can think of how we classify a text message as a happy one or a not so happy one. We read the text, and then take useful keywords from it. If the keywords in the message are &quot;happy&quot;, &quot;smile&quot;, &quot;good&quot;, &quot;awesome&quot;, &quot;yay&quot; then there is 90% chance that the text is happy text. On the other hand, if the keywords are &quot;sad&quot;, &quot;low&quot;, &quot;stressed&quot;, &quot;tired&quot; then you probably wanna gift a chocolate to the sender. So very similar to this, we look for keywords in the mail to classify it as spam or not-spam (also called ham by many). But unlike the happy message example above, we rarely have a set of keywords that clearly mean the message is a spam. And that's where machine learning comes!!!</p>
+<p>The job of ML here is to continuously build that &quot;set of keywords&quot; (called dictionary) and assign them &quot;weights&quot; (called feature) which is the probability of the mail being spam if it contains that keyword. And to calculate that probability we will use the <a href="https://www.machinelearningplus.com/predictive-modeling/how-naive-bayes-algorithm-works-with-example-and-full-code/">Naive Bayes Theorem</a>.</p>
+<p>We will follow the given steps to develop our project:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Prepare Data</strong>: To train and test the model, we will prepare data, i.e mails, to be utilized by the software. This has further parts which I will discuss in another post.</p></li>
+<li><p><strong>Generate Dictionary</strong>: We will read the preprocessed data and bring out keywords that are frequently present in the mails and note their respective frequency.</p></li>
+<li><p><strong>Generate Feature</strong>: This step will assign the weights to each word in the dictionary.</p></li>
+<li><p><strong>Generate the ML Model</strong>: When we have the required dictionary and feature, we will use Naive Bayes Theorem to predict whether the given mail is a spam or not. Then given the correctness of the result, we will adjust the dictionary and features.</p></li>
+<li><p><strong>Test the ML Model</strong>: After the model has &quot;learned&quot; from the previous step, we will test it with new data that it has never seen. Again, based on the correctness we will tweak the model and ask it to learn again (similar to what happens to students in tests).</p></li>
+</ol>
+<p>The moment I heard that I had to use ML in the project, a thought crossed my mind that I should use Python as the tool. And surely enough, in the python implementation I mentioned above, I found the way, tools and code to use as a base for my project. Another reason why I chose python was because it has the <a href="https://scikit-learn.org/stable/index.html">scikit-learn library</a> which will be a great help in building this project.</p>
+<p>So the workflow that I planned today was:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Build prototype</strong>: I will follow the instructions given <a href="https://appliedmachinelearning.blog/2017/01/23/email-spam-filter-python-scikit-learn/">here</a> to build the prototype. This will be almost same as the one that they have built.</p></li>
+<li><p><strong>Add pre-processor</strong>: After successfully testing the prototype with the processed data, I will add the pre-processor that will read all the incoming mails, pre-processes them (i.e removes stop words, URLs, numbers, etc. and performs lemmatization) and then passes it on to the prototype.</p></li>
+<li><p><strong>Extensive testing</strong>: Increasing the size of dictionary and optimizing weights of words.</p></li>
+</ol>
+<p>After this, we should have a basic functioning spam filter with us that could be deployed. Then we could further enhance its features with:</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p><strong>User inputs</strong>: Before putting any mail in the spam folder, ask the user. If the user input matches with the spam filter, then it increases the weights of the spam words in that particular email, else the weights are decreased by some percentage.</p></li>
+<li><p><strong>Block/report spammers</strong>: After a predefined number of spam mails from an address, it will be warned. If it continues to send spam mails, it will be blocked.</p></li>
+</ol>
+<p>So now that I have got my project and have my work-plan ready, I am totally pumped to start working on it.</p>
+</body>
+</html>
