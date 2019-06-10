@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-5-of-summer-internship">Day 5 of Summer Internship</h1>
+<p><em>Date: June 8th, 2019</em></p>
+<p>Saturday, but I still had a working day today. Well not like I had a problem with it, in fact I will prefer working over staying idle in the PG. But being Saturday, the developers were on a holiday and so was my head. So I had to handle much of things by myself.</p>
+<p>I still had the UnicodeDecodeError from yesterday to deal with. So I searched the internet and found the following things:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://www.computerhope.com/unix/ufile.htm"><strong>file -i</strong></a> : A Linux command that detects type of file. With the -i flag, it prints the mime type strings. So using this I got:</p>
+<p>sudhanshu@dubey:/media/sudhanshu/Thunder/Repos/spam_filter$ file -i train-mails/3-1msg1.txt train-mails/3-1msg1.txt: text/plain; charset=us-ascii</p></li>
+<li><p><a href="https://pypi.org/project/chardet/"><strong>chardet</strong></a>: This is an open-source python library that can detect character encoding.</p></li>
+</ol>
+<p>I decided to use this in my code to first find the character encoding of a given mail and then process as such. But I ran into a problem. The open() method was returning the object of type _io.TextIOWrapper and the chardet.detect() method only takes bytes or bytearray as input (or so it said). I tried various coversion methods but in vain. So chardet.detect() didn't proved much helpful for me and I was still stuck with that error.</p>
+<p>Being a Saturday, the atmosphere in the office was light and playful. Not finding a way around the error, I sat down to write blog posts after the lunch.</p>
+<p>While trying out chardet, I had noticed that I was getting IndentationError sometimes. Indentation is always a big issue in Python. So I decided to use <a href="https://pypi.org/project/flake8/">Flake8</a> to properly format my code. You can check <a href="https://medium.com/python-pandemonium/what-is-flake8-and-why-we-should-use-it-b89bd78073f2">here</a> to know what is flake8 and why should you use it. But I love my vim and so I decided to integrate flake8 in vim itself. And I found just the right thing in <a href="https://github.com/nvie/vim-flake8">vim-flake8</a>.</p>
+<p>I followed their instructions to properly setup and configure vim-flake8 which involved installing <a href="https://github.com/tpope/vim-pathogen">vim-pathogen</a> (A runtime path and plugin manager for vim) and that completed my previously incomplete installation of <a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a> (A code-completion engine for Vim).</p>
+<p>So it was quite a benificial thing to do. ;-)</p>
+</body>
+</html>
