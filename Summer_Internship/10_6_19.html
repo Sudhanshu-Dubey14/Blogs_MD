@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-6-of-summer-internship">Day 6 of Summer Internship</h1>
+<p><em>Date: June 10th, 2019</em></p>
+<p>Right after entering the office, I approached my head regarding the server that I had asked for. And surely enough, within 10 mins, I had my server with me. I mean, through SSH, not physically obviously. Its a server. Its there with you everywhere everytime but not physically, much like a god.</p>
+<p>But my god here was a very basic and bare one, almost new born. So I had to install everything like man, vim (yet to personalise it), git, tmux, pip3 and the packages of python that I want to use. Now I had to, for the first time, push my git repo to a personal remote server. And I did it <a href="https://hacksd.wordpress.com/2019/06/10/git-ssh-private-collaboration/">like that</a>.</p>
+<p>I was alone today as both of my friends were absent (and doesn't looks like they will be back soon). So for the first time, I had lunch with the senior employees here (I will usually have lunch with my friends), which is good step in making contact I guess.</p>
+<p>After the lunch, I sat again with my bugged code. I tried to find solutions to the UnicodeDecodeError. Not able to find anything relevant, I just decided to open the files in their given encoding. Luckily, all the files were encoded in <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> so I just passed &quot;encoding=&quot;us-ascii&quot;&quot; as an argument to the open() method. But that too gave similar error:</p>
+<pre><code>UnicodeDecodeError: &#39;ascii&#39; codec can&#39;t decode byte 0xc4 in position 16: ordinal not in range(128)</code></pre>
+<p>Then I tried reading the test mails. And surprisingly, the opened correctly. So assuming that there is that 1 file with some strange characters in those 720 training mails, I used exception handling to <a href="https://www.tutorialspoint.com/python3/python_pass_statement.htm">bypass</a> the error.</p>
+<p>Then there came a <a href="https://docs.python.org/3/library/exceptions.html#RuntimeError">RunTime error</a>. The logic selecting the useful keywords was incorrect. It tried to change the loop-control at runtime and python did not allowed this. So I modified the logic so that instead of modifying the loop-control variable, it would work with different variable.</p>
+<p>After that, a new error came along:</p>
+<pre><code>ValueError: Found input variables with inconsistent numbers of samples: [703, 702]</code></pre>
+<p>We had 702 training emails, but the code was somehow reading more emails than that. Tired by that time, I decided to leave this error for tomorrow.</p>
+<p>During all this debugging process, I was irritated how everytime flak8 would pop up giving me advices to properly format the code. So before wrapping things up, I did all the formatting in one shot. It was basically all give space there and remove space from there. But it does helps your code look beautiful. So its like a makeup with flake8 being the makeup artist and vim being the parlour.</p>
+<p>Side Note: A special thanks to the 813 songs/music in my phone (60:42:14 hours if you wondered) that kept me company the whole day!!! :-)</p>
+</body>
+</html>
