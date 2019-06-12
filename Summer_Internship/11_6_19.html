@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-7-of-summer-internship">Day 7 of Summer Internship</h1>
+<p><em>Date: June 11th, 2019</em></p>
+<p>I started the day looking at the error I had left yesterday:</p>
+<pre><code>ValueError: Found input variables with inconsistent numbers of samples: [703, 702]</code></pre>
+<p>To check why the error was occurring, I decided to print all the file names it was reading to the console. But my head suggested that we should rather put it in a file as that would make analysing the error much easier. So I did just that and upon opening that file, I found one of the most common and ignored that we do on a linux system. It was reading a <a href="https://unix.stackexchange.com/questions/27923/what-causes-swap-files-to-be-created">swap file</a> of one of the mails that I had opened once and somehow its swap was still alive. So I deleted the file.</p>
+<p><strong><em>Life lesson learnt</em></strong>: Always make sure that no swap files are left after you are done editing the file.</p>
+<p>And after that, <strong>it happened!!!</strong>. My code successfully completed the execution for the first time! (Yay!!! 😁 )</p>
+<p>And the output was ... completely wrong. 😅 My program classified all the test mails as ham (not-spam) But that was okay and expected, we had just stepped up from syntax errors to logical errors. Its similar to turning an adult. You leave the helpful and guiding protection of the compiler/interpreter and are exposed to the relentlessly brutal world of logic. Only you can help yourself here. Many programmers gave up their efforts here and die (in spirit). Only those with proper debugging techniques can outsmart this world and complete their quest. And I had no plan to give up.</p>
+<p>So I decided to peek into what the code was doing secretly. I modified the code so that it would write the Dictionary and Features in separate files. The Dictionary is our collection of important keywords that have occurred in all the mails that we have read. Along with the word is mentioned its number of occurrence. The Features is an attribute of each mail. Its a vector/array of the number of occurrence of the &quot;keywords&quot; in that file. Suppose the keywords are &quot;happy&quot;, &quot;boy&quot; and &quot;house&quot;. And our email is &quot;The boy left the house before the house was set on fire.&quot; Then the features would be &quot;0,1,2&quot;.</p>
+<p>So running the program, I got the features and the dictionary. The dictionary was all good. But there was a problem with the features. It was <strong>all zeroes</strong> and I am talking about 51,840,000 zeroes in the features file.</p>
+<p>Without giving much thought to it, I went to have my lunch.</p>
+<p>After the lunch, I got into a debate with one of my friends whether <a href="https://linux.die.net/man/1/cat">cat</a> was an editor or not. And no, not your pet cat but the Linux concatenation command. On first look it isn't but you surely can manipulate it intelligently to work as an editor, or so was my opinion. I think I will talk about this whole thing in another post, just so we don't get distracted (unlike how I got distracted for the rest of my day). By the way, the whole discussion started with this cool comic about Linux text editors:</p>
+<div class="figure">
+<img src="http://imgs.xkcd.com/comics/real_programmers.png" />
+
+</div>
+</body>
+</html>
