@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-8-of-summer-internship">Day 8 of Summer Internship</h1>
+<p><em>Date: June 12th, 2019</em></p>
+<p>The day started with zeroes, and 51,840,000 of them in the features file. And since it was a logical error, now it was high time to go deep into the code's logic and working. So I closed my eyes and entered my world of thoughts to do some brainstorming. Looking at the code again and again, I tested some of its parts separately, gaining more understanding about them. I decided to print everything the code was doing in files and have a look at it to check where it was going wrong. And then I realised the problem. To build the feature matrix, we need to compare the words of the mail to the dictionary. And the code was erroneously comparing the words of mail with the <strong>count of words</strong> in the dictionary. That was due to a misunderstanding in the working of the enumerate() method.So correcting that part, got word to word comparison. So far so good!</p>
+<p>Well not really, it was reading all the <em>words</em> including &quot;-&quot;, &quot;(&quot;, &quot;,&quot; and other such <em>characters</em>. Thats becuase the word filter that we had applied in the dictionary wasn't applied here. Now that was not really an <strong>error</strong>, it just wasted a lot of CPU time by comparing &quot;-&quot; with 3000 words, certainly not worth it. So I applied the word filtering logic here and while doing that I even modified that logic.</p>
+<p>Earlier, the logic would select a word to put in dictionary if it was made of only alphabets <strong>or</strong> its length was greater than 1 character. That's wrong, isn't it. The word should be considered useful if its made of alphabet <strong>and</strong> its length is greater than 1. In fact it should be greater than 3 cause there aren't many useful 3 letter words. So I applied that modified logic.</p>
+<p>Now all this debugging was possible because I was storing the words being compared in a file, side by side. Hence I was able to see, what it was actually comparing. After I applied the word filtering logic, I ran the program on my local system and it started executing, taking its time to process each file, each word, compare it and write the words being compared in the file. I checked the process using <a href="https://hisham.hm/htop/">htop</a>. The program was consuming around 60% of my CPU time. Cool, it was actually doing something. You would expect these kind of things from an ML software building its model.</p>
+<p>What's more, I pushed the code to the remote server and started the process there too, along with <a href="https://en.wikipedia.org/wiki/Time_%28Unix%29">time command</a>. There, the process was consuming 99% of CPU time (damn!). So I kept the process running and went to have lunch. The server was faster than my system and so, it overtook my system with due time. With the process running, I had nothing else to do. So I replied to some mails, read about a few other things, wrote a blog and searched for &quot;Linux jokes comic&quot; (Hey! don't judge me for it). Here is one even though you didn't asked for it:</p>
+<div class="figure">
+<img src="http://imgs.xkcd.com/comics/linux_user_at_best_buy.png" />
+
+</div>
+<p>A few hours later, it was 6:30 pm and I was about to leave. The program was still running on both sides. It had processed 350+ mails on my side and 500+ mails on the server side out of the 962 (702 train + 260 test mails). Since putting my laptop on sleep while the program was running could seriously corrupt something, I killed the program on my side and checked for the files it had created till then. It had created 2.4 GB of file containing just texts it compared after running for 5 hrs continuously!!! The moment I tried to open the text file in vim, it hanged up my system and I had to REISUB it. And it was then I realised the grave mistake. For 5 hrs, it was just comparing the words and writing the texts in the file. It would have taken 15+ hours for my system to ever complete the whole process. And the file size may have exceeded 10 GB!</p>
+<p>And then I checked the server, and my mind screamed <strong>DAMN!!!</strong> In a run time of 310 mins (around 5 hrs) it had created a 5.4 GB file. 43200000000 bits!!! And guess what, the server had only 12GB of total data. If I had left it like that, the data would have overflowed the server's hard disk. Who knows what may have happened.</p>
+<p>I immediately changed the code to remove that &quot;debugging feature&quot;.</p>
+<p><strong><em>Life lesson learnt</em></strong>: Always remove code meant for debugging, after debugging.</p>
+<p>But running the normal code now, it executed within a minute and have a <em>satisfactory</em> result on my system. The result from the server was not that satisfactory though, even though both were running the same code on the same data. Guess that's what you could expect from ML. While my system's accuracy was around 90%, the server had only 55%.</p>
+<p>So yeah, after all that, the code executed successfully and gave mostly correct result for the first time!!! The prototype was ready. We successfully survived the realm of errors. Onwards to enhancing the program.</p>
+</body>
+</html>
