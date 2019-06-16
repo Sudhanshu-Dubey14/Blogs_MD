@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="day-10-of-summer-internship">Day 10 of Summer Internship</h1>
+<p><em>Date: June 14th, 2019</em></p>
+<p>So I continued to setup my mail server using this <a href="https://appbead.com/blog/how-to-setup-mail-server-on-debian-8-jessie-with-postfix-dovecot-1.html">guide</a> but leaving the parts related to SSL certificate. Like I used IMAP and not IMAPS, thus setting up port 143 and not 993.</p>
+<p>But soon enough, I ran into trouble. The tests mentioned in the guide were not giving positive results and I couldn't determine whether I was doing the right things or not. I consulted my head and he said that rather than using no certificate I should use a self-signed certificate. Less security is better than no security.</p>
+<p>So I did that, followed the tutorial again, this time setting things up for a self-signed certificate. Using IMAPS and port 993. Things were going good and tests were being cleared until the point where I had to create a user. I encountered a strange command that I had never seen before:</p>
+<pre><code>cat &lt;&lt; EOF &gt;&gt; /etc/dovecot/users</code></pre>
+<p>Now I know cat as the concatenation command, &quot;&gt;&gt;&quot; as the append output stream redirector, /etc/dovecot/users as the file name, but what was &quot;&lt;&lt; EOF&quot;. Searching on the internet, I found out that &quot;&lt;&lt; EOF&quot; is a way handling multi-line input to a command of script. &quot;&lt;&lt; EOF&quot; makes it so that the input is accepted until &quot;EOF&quot; is encountered. A better explanation can be found <a href="https://superuser.com/questions/1003760/what-does-eof-do">here</a>.</p>
+<p>After playing around with the command, I continued my work on the mail server. But to not much success as I was stuck with testing the mail user that I had created. The openssl command mentioned in the guide didn't worked. Neither did <a href="https://wiki2.dovecot.org/Tools/Doveadm/Auth">doveadm auth</a> nor <a href="https://wiki2.dovecot.org/Tools/Doveadm/User">doveadmn user</a>. So I was kinda left with a blank. I didn't knew what to do next. I gave the stressful job a pause and indulged in other activities.</p>
+<p>Let's see what I will do tomorrow. And not to forget our daily Linux comic:</p>
+<div class="figure">
+<img src="http://imgs.xkcd.com/comics/sandwich.png" />
+
+</div>
+<p>Sudo has your back, but only if you are in the sudoers file. Otherwise it will report to santa.</p>
+</body>
+</html>
