@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Vim ++</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header>
+<h1 class="title">Vim ++</h1>
+</header>
+<p>Vim, short for Vi Improved, is one of the most popular command line text editor out in the world of Free and Open-Source Softwares. It’s manual describes it as “vim - Vi IMproved, a programmer’s text editor”, and it surely is. A lot of people use it and they have their own reasons for choosing vim. While some are still using it just because they don’t know how to exit after entering once, others have a more genuine reason. But if you ask any Vimmer (a word I just invented), you will surely hear this as one of the reasons: “Its very configurable”. And that’s exactly what we will do today. We are going to enhance our favourite text editor to make it literally vim++.</p>
+<p>There are two way of improving vi improved:</p>
+<h2 id="the-vimrc-file">The Vimrc file</h2>
+<p>While you can set your preferences for each vim instance by using the commands (<a href="https://www.shortcutfoo.com/blog/top-50-vim-configuration-options/">top 50</a> because there is literally no end to them), but the moment you open the next file in vim, every thing will be new and at factory reset. So how do you permanently save your preferences? Enter the <a href="https://vim.fandom.com/wiki/Open_vimrc_file">vimrc</a> file. For every linux user, there is a vim configuration file in your home folder normally. Its hidden so you normally don’t see it. But doing a <code>ls -a | grep vim</code> should reveal the file.</p>
+<p>In that file, you put your prefrences and the key shortcuts that you want to use. As an example, here is one of the most common prefences that people use and that I have used too:</p>
+<pre><code>set number  &quot; see numbers of the line</code></pre>
+<p>So putting the above line in your vimrc file will make vim to show the line numbers. Now there are thousands of commands and preferences that you can use or set, so I am not going to discuss them over here. You can find some useful preferences on <a href="https://spf13.com/post/perfect-vimrc-vim-config-file/">this blog</a>, <a href="https://vimrcfu.com/">this website</a> and this <a href="https://gunpreetahuja.wordpress.com/2014/05/30/all-i-got-to-know-about-vim-1/">this series of articles</a>. But hey, here is what I use, my vimrc:</p>
+<pre><code>set spell spelllang=en_us   &quot;Set spell-check to english us
+
+set spellfile=$HOME/vim/spell/en.utf-8.add  &quot;Add spelling file
+&quot; set ai
+set number  &quot;Set line number
+
+set incsearch   &quot;Highlight expressions
+set ignorecase  &quot;Ignore case in searches
+set smartcase   &quot;Make case-sensitive when all is caps
+set hlsearch    &quot;Highlight searches
+nmap \q :nohlsearch&lt;CR&gt;     &quot;Speacial key combination to undo highlight search
+nmap \e :NERDTreeToggle&lt;CR&gt; &quot;Key combination to toggle NERDTree
+
+set statusline+=%#warningmsg#   &quot;Add warning messages in status line
+set statusline+=%{SyntasticStatuslineFlag()}    &quot;Set Syntastic Status line flag
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+set nocompatible   &quot; Disable vi-compatibility
+set laststatus=2   &quot; Always show the statusline
+set encoding=utf-8 &quot; Necessary to show Unicode glyphs
+
+execute pathogen#infect()   &quot;Enable pathogen
+syntax on
+filetype plugin indent on
+autocmd BufWritePost *.py call flake8#Flake8()  &quot;Enable flake 8 on saving python file</code></pre>
+<h2 id="the-plugins">The Plugins</h2>
+<p>Now my vimrc is not meant to work alone. It can but it’s not meant to. My vimrc has some lines that are meant to support some plugins. Plugins as you know, are additional features that really enhance the vim. So let’s have a look at one that I use and love:</p>
+<ol type="1">
+<li><p><a href="https://github.com/tpope/vim-pathogen">Pathogen</a>: From its github description “pathogen.vim makes it super easy to install plugins and runtime files in their own private directories.” And well, that’s exactly what it does. Its a plugin that helps installing other plugins. After you have pathogen, you can just <code>git clone</code> the other plugins in <code>~/.vim/bundle</code>.</p></li>
+<li><p><a href="https://github.com/tpope/vim-fugitive">Fugitive</a>: Another one from the <a href="https://github.com/tpope">developer of Pathogen</a>, this one is a killer. “A Git wrapper so awesome, it should be illegal”. If you are an addict of <a href="https://hacksd.wordpress.com/2019/02/28/using-git/">git</a> and vim, this right here is your drug. It just elegantly merges vim and git together. I personally love it.</p></li>
+<li><p><a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a>: A code-completion engine for Vim. This is what most developers would like to have in their vim. Now your vim is upgraded to an IDE.</p></li>
+<li><p><a href="https://github.com/vim-syntastic/syntastic">Syntastic</a>: Another developer friendly tool, this is a syntax checking tool that helps you to write correct and proper code.</p></li>
+<li><p><a href="https://github.com/nvie/vim-flake8">Vim-Flake8</a>: Love python and its coding standards? Well here is the too to help you write the best python code. Currently syntastic and flake8 overlap in my system, but I will soon disable syntastic for python because I prefer flake8.</p></li>
+<li><p><a href="https://github.com/scrooloose/nerdtree">NERDTree</a>: This plugin lets to open a tree explorer of your current directory. Another step closer to getting your own IDE in the terminal. You can open the explorer with :Explore command in vim, but this one is seriously better.</p></li>
+<li><p><a href="https://github.com/Lokaltog/vim-powerline">Powerline</a>: And who doesn’t like a good looking vim. Though deprecated, this plugin greatly enhances your status line and makes it a lot more informative.</p></li>
+</ol>
+<p>Now these are just some of the plugins that I have explored and use currently. There are loads of them out there for you to enjoy!!!</p>
+<h2 id="extras">Extras</h2>
+<p>Just some extra stuff to makes your vim experience much more rewarding:</p>
+<ul>
+<li><p>Tabs: Yes, you heard it right! Vim has tabs and why not. Just run <code>:tabe &lt;filename&gt;</code> to open file in another tab and then navigate with <code>:tabn</code> and <code>:tabp</code>. The best part is that tabs let you seamlessly copy and move info amongst various files in the same terminal.</p></li>
+<li><p>Window split: While tabs are more useful, sometimes you may just want to split the window so here you go. <code>:split filename</code> to split window horizontally and <code>:vsplit file</code> for vertical split. Use <code>ctrl-w ctrl-w</code> to navigate.</p></li>
+<li><p>Auto-correction: If you are using spellcheck, then reach the miss-spelled word by <code>]s</code> (forward) or <code>[s</code> (backward) and when on the word, press <code>z=</code> to get a list of possible correction. Fun fact: I used auto-correction to auto-correct the Auto-Correction.</p></li>
+<li><p>Copy to graphic clipboard: Install vim-gnome in ubuntu using <code>sudo apt install vim-gnome</code> and press <code>&quot;+y</code> to copy selected content to the graphical clipboard to paste it anywhere. <code>&quot;+p</code> also pastes the copied content in vim.</p></li>
+</ul>
+<p>So these are all that I currently use to enhance my vim. If in future I discover anything new, I will update here. And while I exit from here, think you can exit from vim? Well think again after reading <a href="https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/">this</a></p>
+<p><img src="http://devhumor.com/content/uploads/images/May2017/exit-vim-2.jpg" /></p>
+</body>
+</html>
