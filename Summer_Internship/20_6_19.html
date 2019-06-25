@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>20_6_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-14-of-summer-internship">Day 14 of Summer Internship</h1>
+<p><em>Date: June 20th, 2019</em></p>
+<p>After completing our mail server setup yesterday, I eagerly returned to our python code and started building the actual working model. At this point, we have completed 2 stages of the project:</p>
+<ol type="1">
+<li>Built and successfully tested the ML model</li>
+<li>Successfully installed and configured the mail server</li>
+</ol>
+<p>Now as per our modified plan (which I modified without informing you guys), we have the following parts left:</p>
+<ol type="1">
+<li>Create the code that would implement the ML model</li>
+<li>Extensively test the code with real mails</li>
+<li>Deploy the whole project</li>
+</ol>
+<p>So I started building the code which would implement the ML model. Unlike the code that build the model, this one would read one mail at a time. As decided on the <a href="https://hacksd.wordpress.com/2019/06/14/day-9-of-summer-internship/">9th day</a>, it would have the following works to do:</p>
+<ol type="1">
+<li>Read the incoming mail.</li>
+<li>Preprocess it.</li>
+<li>Load the dictionary.</li>
+<li>Extract features from that mail.</li>
+<li>Load the ML model.</li>
+<li>Classify the mail and put it in the respective folder (inbox or spam).</li>
+</ol>
+<p>So starting with the preprocessor, I first decided that it would do the following to filter out the mail:</p>
+<ol type="1">
+<li>Check that all words contain only alphabets.</li>
+<li>Check that length of word is greater than 2.</li>
+<li>Remove <a href="https://en.wikipedia.org/wiki/Stop_words">stop words</a>, i.e the words that occur too frequently and don’t lend much to the meaning to the sentence.</li>
+<li>Perform <a href="https://en.wikipedia.org/wiki/Lemmatisation">lemmatization</a>, i.e change the word to its base form.</li>
+</ol>
+<p>Now the first two parts were already happening in the model building code, so I copied those parts in our preprocessor. Now waht was left was removing stop words and lemmatization. For this, I searched the net and got <a href="https://www.nltk.org/">NLTK</a>(Natural Language ToolKit) of python. It had its own collection of stop words and it even performs lemmatization. So initially I utilised it for the stop words purpose but then when I researched more, I found that its collection of English stop words has only 179 words. The length wasn’t much of a problem but I decided to search for a better and more efficient list of stop words and possibly a better library. And something better than a <a href="https://medium.com/@ageitgey/natural-language-processing-is-fun-9a0bff37854e">nlp</a> library is a nlp joke:</p>
+<p><img src="https://i.redd.it/ipy3vvkma2501.jpg" /></p>
+</body>
+</html>
