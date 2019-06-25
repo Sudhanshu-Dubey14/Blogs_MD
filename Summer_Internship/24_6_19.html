@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>24_6_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-17-of-summer-internship">Day 17 of Summer Internship</h1>
+<p><em>Date: June 24st, 2019</em></p>
+<p>Following along with the package creation of yesterday, I created another package <code>features.py</code> which would perform the feature extraction as this process is also used everytime you try to classify the mails. This took a bit of thinking and time but was not much of a difficult task. Also, separating the whole code into package improved my understanding of how the code was working.</p>
+<p>After this, I had to go over all the code and refactor it to inculcate the use of packages. One thing I noticed was that, after I had changed the code to use packages, there was an improvement in the accuracy of the results as we can see here:</p>
+<p>Before: [119 11] After: [[123 7] [ 20 110]] [ 16 114]]</p>
+<p>These results are in the form: Ham Spam Ham Spam</p>
+<p>The column has the prediction of the model, and the rows has the correct result. This is what you call a <a href="https://machinelearningmastery.com/confusion-matrix-machine-learning/">Confusion Matrix</a>. To say it simply, currently, my code is classifying 123 of 130 mails as ham (correct) and other 7 as spam (incorrect). Also, 114 out of 130 are being marked as spam (correct again) and the other 16 are being marked as ham. Now here is the tricky, as per the confusion matrix, the results seem satisfactory enough but we don’t know which mails it is actually calling spam or ham. Its almost like you are saying 20 kids are cheating in the exam, but you can’t point out which are these loser kids. That was a major reason why we had to for a single mail classification approach.</p>
+<p>So after all that, I finally added the model reading and prediction feature in our single mail classifier. For saving the model in file, I used the <a href="https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/">pickle library</a>. And then, when I checked the result like:</p>
+<pre><code>sudhanshu@dubey:~$ python3 working_model.py test-mails/spmsgc29.txt 
+test-mails/spmsgc29.txt is a spam!!!</code></pre>
+<p>BANG!!!</p>
+<p>It gave the right result. As the name indicates, spmsgc29.txt is indeed a spam mail. I tested it again and again with various other emails that I had and it classified them all correctly!!! Finally, my third phase of the project had completed (Yay!!) I reported that to my head and he was happy about it. Strangely enough, both the first and the third phase have completed after my working hour and I had to stay a bit late in both cases just to verify the results.</p>
+<p>So now that we are able to classify the emails accurately, we need to integrate this code in the mail server. Also, we need to make it so that it takes user input and improves its accuracy. But that was it for today. I was done and happy. But what I was not happy about is this:</p>
+<p><img src="http://devhumor.com/content/uploads/images/September2014/Steve-Jobs-vs-Dennis-Ritchie.jpg" /></p>
+<p>We need to know about and praise <a href="https://en.wikipedia.org/wiki/Dennis_Ritchie">Dennis Ritchie</a>.</p>
+</body>
+</html>
