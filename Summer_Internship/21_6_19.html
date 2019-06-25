@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>21_6_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-15-of-summer-intership">Day 15 of Summer Intership</h1>
+<p><em>Date: June 21st, 2019</em></p>
+<p>Yesterday, we had lest the work in search of a better Natural Language Processing library than NLTK. I asked for this in the <a href="http://greatdevelopers.github.io/">GD</a> and got various links. From one of those links, I found out about the <a href="https://spacy.io/">spaCy library</a>. spaCy is a library for advanced Natural Language Processing in Python and Cython. Many praise it for its industry-ready features. So after doing some research on it, I decided to use it in my preprocessor.</p>
+<p>But deploying spaCy was not as easy as I thought it would be. This was largely due to <a href="https://spacy.io/api/tokenizer">tokenization</a>. Tokenization is essentially breaking the given text into segments which makes further processing simpler. So it was essential, but it forced to largely change the way I was processing and storing the words. But it was all for the betterment of the code so no complaints there. After doing all that, I was getting proper words in the processed text.</p>
+<p>Now it was time for lemmatization. SpaCy has a very convenient function that would give you the lemma (the base form) of the word. But lemmatization, though easy didn’t happened exactly as I had thought in the following ways:</p>
+<ol type="1">
+<li><p>I was sure that the token.lemma_ function would return another token, but to my surprise, it returns a string object.</p></li>
+<li><p>Some words I thought should have been turned into their lemma were shown in their original form. For example:</p>
+<p>sudhanshu@dubey:/media/sudhanshu/Thunder/Documents/Bolgs_MD/Summer_Internship$ python3 Python 3.6.8 (default, Apr 9 2019, 04:59:38) [GCC 8.3.0] on linux Type “help”, “copyright”, “credits” or “license” for more information. &gt;&gt;&gt; import spacy &gt;&gt;&gt; nlp = spacy.load(“en_core_web_sm”) &gt;&gt;&gt; doc = nlp(u’surprise surprising surprisingly’) &gt;&gt;&gt; for token in doc: … print(token.lemma_) … surprise surprising surprisingly</p></li>
+</ol>
+<p>I had honestly thought that all the words would be turned to surprise. Was the lemmatizer not working properly? Python said no to this:</p>
+<pre><code>&gt;&gt;&gt; doc1 = nlp(u&#39;write writing written wrote&#39;)
+&gt;&gt;&gt; for token in doc1:
+...     print(token.lemma_)
+... 
+write
+write
+write
+write</code></pre>
+<p>So I guess I need to improve my concepts of NLP processes. Anyway, now I had my preprocessor ready. I may add other features for better text processing, but that’s for later. Currently, there was one thing pestering me. The model building code also used a native for of this preprocessor and so I had to update that too because the data should be processed in the same manner by the same library in both parts of the project (the model building one and the model using one) for it to give correct results. But rather than defining the function everywhere, I thought of building a package that would contain this and other code that should be repetitively used. So I started reading about how to build package. Another thought that occurred to me was that I should generate documentation of the whole code, which can be later submitted as the project report. And the documentation should be automatically generated, with the help of comments in the code. For this purpose, I decided to use <a href="http://doxygen.nl/">Doxygen</a>. Doxygen was originally made for other languages and has recently added python in its set of languages, but guess who has been speaking python since long ago:</p>
+<p><img src="https://cdn.iwastesomuchtime.com/2182016205396.jpg" /></p>
+<p>20 points to Gryffindor!!!</p>
+</body>
+</html>
