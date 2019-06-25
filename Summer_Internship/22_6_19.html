@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>22_6_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-16-of-summer-internship">Day 16 of Summer Internship</h1>
+<p><em>Date: June 22st, 2019</em></p>
+<p>Last time we had decided to do some documentation of our code, and build packages of the frequently used codes. Going ahead with that, I installed <a href="http://doxygen.nl/">Doxygen</a>. I followed the <a href="https://engtech.wordpress.com/2007/03/20/automatic_documentation_python_doxygen/">guide</a> and configured doxygen for my project. Then as mentioned <a href="http://doxygen.nl/manual/docblocks.html#structuralcommands">here</a>, I added the comments in my code. After all was done, running <code>doxygen config.dox</code> from the root directory of the project generated the documentation in HTML.</p>
+<p>Now it was time to return to the code. I started by following this <a href="https://python-packaging.readthedocs.io/en/latest/minimal.html">guide</a> to create a package named supporters where I planned to put all the codes like the preprocessor and the feature generator. I started by transferring the preprocessor into a separate file in the package. I tried to import the package with the following line:</p>
+<pre><code>from supporters import preprocessor</code></pre>
+<p>But it gave me the following error:</p>
+<pre><code>TypeError: &#39;module&#39; object is not callable</code></pre>
+<p>Searching the net, I found that I should import the method as:</p>
+<pre><code>from supporters.preprocessor import preprocessor</code></pre>
+<p>So apparently, the first “preprocessor” is the name of the file, whereas the second is the name of the method to import. Earlier, I was only specifying the package, and not the file name/class name.</p>
+<p>So after this, it worked fine. Then when I tried to <code>git add</code> the package, I found that even the python’s interpreted <code>.pyc</code> files were also staged for commit. But I wouldn’t want to commit these files. There were also other text files that I was creating only for debugging purposes and weren’t really part of the code. So, I decided to, for the first time ever, use the <a href="https://git-scm.com/docs/gitignore">gitignore</a> file. As the name implies, this file specifies those files that you want git to ignore. The changes in them will not be observed by git. Normally, you put the compiled objects in this file. So I just specified the contents as:</p>
+<pre><code>sudhanshu@dubey:/media/sudhanshu/Thunder/Repos/spam_filter/supporters$ cat ../.gitignore 
+*.pyc
+*.swp</code></pre>
+<p>As I don’t want the swap files and the python byte code files in my commits. Another thing that we don’t want are frozen processes. But how do we avoid them, well obviously we follow the John Wick approach:</p>
+<p><img src="http://1.bp.blogspot.com/-PSQ8BNeWd2I/VpO84WQ6k2I/AAAAAAAAAG0/RtXL5ULw3pA/s1600/IMG-20160111-WA0000.jpg" /></p>
+<p>Certainly, Linux is the Keanu Revees of computer world.</p>
+</body>
+</html>
