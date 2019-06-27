@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>25_6_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-18-of-summer-internship">Day 18 of Summer Internship</h1>
+<p><em>Date: June 25st, 2019</em></p>
+<p>After completing the third phase yesterday, I was kinda clueless today. So I first started to update the documentation. I wanted to add various parameters like date of documentation, author of code, version, etc. These can be easily added by using the <a href="http://doxygen.nl/manual/commands.html#cmd_intro">Doxygen Commands</a>. But the problem was that I was using python. Doxygen isn’t much friendly with python after all. And though they do provide help in their <a href="http://doxygen.nl/manual/docblocks.html">documentation</a>(scroll down to reach the python part), it didn’t worked after all. Maybe I was doing something wrong, maybe not. Who knows!!!</p>
+<p>And searching the internet more, I found <a href="https://github.com/Feneric/doxypypy">doxypypy</a>. There is <a href="https://github.com/Feneric/doxypy">doxypy</a> yeah, but its documentation isn’t available anywhere and according to it author, doxypypy is better. So I used doxypypy, but it wasn’t much helpful after all. Anyway, I will try to find a way to properly update the documentation later.</p>
+<p>For now, I was searching for a way to make my code learn continuously. What it is doing right now is learning all the things at once and then predicting the things later. But as we may expect, there will be errors in the predictions. And to err is human. Or maybe machine here!!! But isn’t our ultimate aim to make a machine think link human!? Ah, anyway let’s not dwell into that. We need to make it so that the code can learn from its own mistakes. Because that is machine <strong>learning</strong>, isn’t it.</p>
+<p>But I haven’t yet seen how the model that I had built actually looks like. <a href="https://docs.python.org/3/library/pickle.html">Pickle</a> stores the model in binary form and thus the result file isn’t human readable. Directly printing the model also does not helps. So searching around, I found the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB.partial_fit">partial_fit()</a> method that may help.</p>
+<p>But I was reluctant in using it right now. Actually, the whole day, I was waiting for real mails to test the current working model. After idling around the whole day searching stuff, I finally got the mails at the end of my working hours. Strangely enough, things seem to happen with me only at the 11th hour. Anyway, opening the mails the cruel reality hit me hard. The real mails that travel around the world are in now way simple and obviously nothing like the preprocessed mails that I was using. Especially the spam ones. Seeing them, I realised why the world wants freedom from spam mails. There were html and strange characters riddled everywhere. And then again, I had 2000+ mails to process. It was at that moment I found this template truly relatable:</p>
+<p><img src="https://imgflip.com/i/34c4lh.jpg" /></p>
+<p>But we must not give up just because reality is cruel. We must move forward, we must stay motivated. And you wanna know the source of motivation? Well here it is:</p>
+<p><img src="http://devhumor.com/content/uploads/images/June2019/so.png" /></p>
+<p>A hearty thanks to <a href="https://stackoverflow.com/">StackOverflow.com</a>.</p>
+</body>
+</html>
