@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>27_6_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-20-of-summer-internship">Day 20 of Summer Internship</h1>
+<p><em>Date: June 27st, 2019</em></p>
+<p>Opening the code today, I found the nested loops of yesterday. And I surely don’t want to do more nesting. So what’s the alternative of nesting, especially when you don’t know the degree of nesting. Well obviously, <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursion</a>. With recursion, we would not need to worry about the degree of multiparting in the email. So I replaced the looping logic with recursion logic. And that helped us with this multipart problem.</p>
+<p>Moving ahead, I found another issue. It wasn’t an issue that the program would report, it was something that we as developer should realise. The issue was that even though I had avoid the headers of the email by focusing on the body, the body still had a lot of irrelevant data in it. This included the attached photos, videos, audios, documents, applications, etc. Anything “attached” to the body was out of our domain of data. As my head said, that’s the antivirus’ job to scan those files and ensure their legitimacy. Our job was only to analyse the text body.</p>
+<p>But how could we avoid the attachments when emails considered them as part of their “body”. Then I discovered this line:</p>
+<pre><code>Content-Type: text/plain;</code></pre>
+<p>Every part of the email had this parameter that defines what kind of content is there in that part. This is used by the Mail User Agent/ Email Client uses to call the appropriate application that can open that kind of content. So using this, we can decide which kind of contents we want our filter to look at. Here <code>text</code> is the maintype and <code>plain</code> is the subtype. Initially I decided that we should process all the part which were having <code>text</code> as their main type. But just to confirm, I went to this <a href="https://www.iana.org/assignments/media-types/media-types.xhtml#text">site</a> and damn! There are just too many subtypes of the <code>text</code> type. I sure don’t want to mess around with all of them. So after consulting with my head, I decided to use the <code>plain</code> subtype as our filter. And thanks for the email package, I had the following functions to fetch the content-maintype and content-subtype:</p>
+<pre><code>get_content_maintype()
+get_content_subtype()</code></pre>
+<p>So setting it all up, I started the process of classification on both my system and the server. After a few minutes, I found that my process on the server was hanged. And no, the server was working properly, giving 100% CPU to the process, but the process was doing something and not telling me. So after waiting for a while, I terminated the process. Improving the debugging messages, I found out that it was getting stuck in reading one particular file. It wasn’t too big. My largest file was around 8MB and this one was only 2MB. Then I opened the file and realised the cause. The email had a pdf attached. But it was an “attached” file, so our logic should have ignored it right? Wrong. Its content-type was <code>text/plain</code>. And I had no way of defending against it! So for that moment, I just removed that file from there and restarted the process. And it kept running, consuming a whole CPU on both my system and the server. Well, that’s to be expected of a ML process I guess.</p>
+<p>So leaving the process running, I left the office. But someone who was still in the office was this naive businessman waiting for his site:</p>
+<p><img src="http://devhumor.com/content/uploads/images/June2019/chain_of_command.png" /></p>
+</body>
+</html>
