@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>4_7_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-26-of-summer-internship">Day 26 of Summer Internship</h1>
+<p><em>Date: July 4th, 2019</em></p>
+<p>Now that I had found a way to run my code like a continuously, I was ready to put it on server. But just as I moved it on the server, I realised that I have still one thing left to do before I can call the code a “service”. A service runs in the background without disturbing the user. And my code still required an active terminal to run. So I had to put it in the background. For that, I found 3 ways:</p>
+<ol type="1">
+<li><a href="http://man7.org/linux/man-pages/man1/setsid.1.html">setsid</a></li>
+<li><a href="https://linux.die.net/man/1/nohup">nohup</a></li>
+<li><command> &amp;</li>
+</ol>
+<p>While nohup certainly looks promising and is better than appending your command with &amp;, (<a href="https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con?noredirect=1&amp;lq=1">here is why</a>), I just decided to use setsid for the time being and it’s working fine.</p>
+<p>Now since I was on the mail server, I decided to keep watch on the whole directory (by the name of the server domain name, local.nebero in my case) where the mails will come. But that resulted in error. Dovecot (our IMAP and LMTP server) would first store the mail in the tmp (local.nebero/<user>/tmp) and then move it to the new directory. So our inotifywait was reporting the file to be created in both the tmp and new directory. But before the python code could read the file from tmp, it is already moved to new, thus giving us IOError. And so, I had to change the watch directory to the new directory. But this is not a good solution if a lot of users are present on the server.</p>
+<p>Another issue was the accuracy of the results. But I decided to solve this from the user perspective. I wanted to see how the user will see the mails. It was time to develop the software from the user point of view. Because I was kinda tired of thinking things from the developers point of view. And if you want to see a demo, here is how much developers have to think and why you should not interrupt their train of thoughts:</p>
+<p><img src="https://qph.fs.quoracdn.net/main-qimg-c44ba52da778811f9a30e9b21f073f04" /></p>
+</body>
+</html>
