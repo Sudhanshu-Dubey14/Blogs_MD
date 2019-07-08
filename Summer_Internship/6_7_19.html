@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>6_7_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-28-of-summer-internship">Day 28 of Summer Internship</h1>
+<p><em>Date: July 6th, 2019</em></p>
+<p>Saturday again. Not in much of a mood to code, I decided to complete the documentation of my project. I added more special commands, like <span class="citation" data-cites="todo">[@todo]</span>(http://www.doxygen.nl/manual/commands.html#cmdtodo) to specify what is left to do and <span class="citation" data-cites="warning">[@warning]</span>(http://www.doxygen.nl/manual/commands.html#cmdwarning) to specify the warnings for the end cases or improper usage. The I specified the command line parameters that the files expect using <span class="citation" data-cites="param">@param</span>.</p>
+<p>While writing the todo, I remembered the read issue I had in my python service. The issue was that if the watchlog file has content prior to the start of service, then the service will take all the content at once despite the lines being separated by the newline character (‘’) and then give IOError. I had to modify it, give it a functionality like <a href="https://www.computerhope.com/unix/utail.htm"><code>tail -1f</code></a> command of Linux. For this, I searched the net and got many solutions. I was using the <a href="https://www.tutorialspoint.com/python3/file_read.htm"><code>read()</code></a> method by asking it to read 1024 characters (the average size of line). Some suggested to use <a href="https://www.tutorialspoint.com/python3/file_readlines.htm"><code>readlines()</code></a>, but it was continuously reading the last line again and again. Some said to iterate over the file and then save the last line but that was just of waste of CPU time and also not suitable for my use.</p>
+<p>I then decided to sacrifice my code’s portability to use <a href="https://docs.python.org/3/library/subprocess.html">subprocess</a> module to actually run <code>tail -1f</code>. Initially it looked to be working fine, but it had it own issues. It was difficult to obtain the output as a string. Even <a href="https://docs.python.org/3/library/subprocess.html#subprocess.check_output">check_output</a> wasn’t much helpful for me. Another concern was that what if the service will just execute <code>tail -1f</code> and get locked at it.</p>
+<p>And then I noticed another method of python, <a href="https://www.tutorialspoint.com/python3/file_readline.htm">readline()</a> (notice the absent of ‘s’). Basically it reads only a single line. Another using readline() solved my problem. Now it was reading one line at a time and after reading all the lines, it would wait for new lines to come. And this was excatly the behavior that I wanted.</p>
+<p>Now there was one thing that I was pondering over. This code, this software in itself can never be “completed”. That’s because it’s functioning is tightly bound to the mail server. And mail servers come in a variety of flavors. The best that I provide is a software that does its work after receiving instructions from the mail server. So I had to make it so that all the critical parameters are provided by the server, possibly via command line, so that the software is completely flexible and independent of the mail server which is using this. Also, I need to write proper instructions for anyone who may wish to utilise this software. Because if I don’t, it’s gonna be a 3D horror movie:</p>
+<p><img src="https://qph.fs.quoracdn.net/main-qimg-249a6ffdad97165a773968a7ee86c072" /></p>
+</body>
+</html>
