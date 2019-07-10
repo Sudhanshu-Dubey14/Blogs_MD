@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>8_7_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-29-of-summer-internship">Day 29 of Summer Internship</h1>
+<p><em>Date: July 8th, 2019</em></p>
+<p>Today I sat down to make scripts which would be called when the user classifies a mail as spam or ham. These are basically scripts that help the model to evolve overtime as per the user requirement. I am making my model humble and down to earth (or kernel in our case) so that it accepts its mistakes, corrects them, learns from them and strives for perfection!!! Now now, before I start treating it like my child, I guess we should stop. But seriously, these are qualities that us humans should develop but here I am teaching these to my ML Model.</p>
+<p>But shell scripting isn’t really my forte. Though I admire its power, I never needed to work on it. But now it was the fateful day. So I started with the traditional:</p>
+<pre><code># ! /bin/bash</code></pre>
+<p>And immediately I had no idea what to write next. So I saw some basic tutorials on the internet and then formed my whole idea on what I want my script to do and how to do it. To read and process the location of mails, I had to use <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. And damn these are some cool stuff and I wanna learn them. Here is a really <a href="http://www.rexegg.com/">cool tutorial</a> which I think I will be using to learn regex. After regex, I learned how to detect the file type with <code>if</code> (remember that <em>everything</em> in Linux is a <em>file</em>) and how <code>if</code> basically calls the <a href="https://linux.die.net/man/1/test"><code>test</code></a> command and just evaluates its result. Little by little, I was learning shell scripting and building my scripts and that is why it took more time that what I expected, but that was fine. I was learning and that was enough.</p>
+<p>After developing the scripts, I had to test them. By passing mails individually, it was working fine. Now I wanted to pass many files at once. I wished to do that in a single command but couldn’t find one. So I had to write another script just to do that. Now after all was said and done (and it was quite late now) I tested my scripts. It took my code around 10 to 15 min to read 2400+ mails, move and copy them, retrain the model and dictionary <em>twice</em> and then deleted the mails that were used to train the models. Which in my opinion is pretty good performance. Since it was already so late, I decided to test the updated model tomorrow. I was really tired and I wanted some good sleep. And the best way to fall asleep is by counting sheep. Or is it:</p>
+<p><img src="https://imgs.xkcd.com/comics/cant_sleep.png" /></p>
+<p>Hint to crack the joke: First do <a href="https://duckduckgo.com/?q=32768+in+binary&amp;t=canonical&amp;atb=v134-1&amp;ia=answer">this</a> and then realize that size of int in C is _ bytes.</p>
+</body>
+</html>
