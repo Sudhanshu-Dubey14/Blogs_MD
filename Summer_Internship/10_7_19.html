@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>10_7_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-31-of-summer-internship">Day 31 of Summer Internship</h1>
+<p><em>Date: July 10th, 2019</em></p>
+<p>Today I had decided to write the user manual for my software. I was writing it in <a href="https://daringfireball.net/projects/markdown/">markdown</a> because its easy to write in MD, its easy to read in MD, its easy to convert MD to many other formats and GitHub’s README files are written in MD. MD is literally everywhere, because its just so cool. Even my blogs are <a href="https://github.com/Sudhanshu-Dubey14/Blogs_MD">written in MD</a> and my presentations too.</p>
+<p>So I started writing the manual and as I was doing it, I was kinda recapping the whole project, visiting the links the I had used again. Also, as I was trying to explain how to use the software, I realized that I could improve the software here and there and make it more user friendly. The more content was going into the manual, the more my code was improving. And though my attempt was to make the code and manual as user friendly as possible, there were some complexities that I just couldn’t avoid. And due to all that, it took more time to write the manual than I had assumed.</p>
+<p>Now after I had finally finished the manual, there was the this one big issue. I wanted this manual to be the main page of my documentation. For that, I had the <span class="citation" data-cites="mainpage">[@mainpage]</span>(http://www.doxygen.nl/manual/commands.html#cmdmainpage) but I was looking for something else. And that I found here, in the 3rd answer of <a href="https://stackoverflow.com/questions/9502426/how-to-make-an-introduction-page-with-doxygen">this question</a>. So I added the name of my manual file in <code>USE_MDFILE_AS_MAINPAGE</code> but that didn’t worked!! Adding the <code>\mainpage</code> commands didn’t helped either!! The after thinking for a moment, I realised that I hadn’t asked Doxygen to look for MD files. Then by appanding <code>*.md</code> in <code>FILE_PATTERNS</code>, I finally got my manual as the main page of my documentation. My work for the day was done.</p>
+<p>As I went to show this to my head, they were watching the live India vs New Zealand cricket match. He asked “So what happened?” and I replied “I am just here to watch the match”. And so we all sat down to watch the match. It was a totally different experience to watch a live match sitting in the office. We were cheering, commenting, suggesting, worrying and laughing. The flow of feelings and emotions was nice. Talking about flow, here is how to understand flow charts:</p>
+<p><img src="https://imgs.xkcd.com/comics/flow_charts.png" /></p>
+</body>
+</html>
