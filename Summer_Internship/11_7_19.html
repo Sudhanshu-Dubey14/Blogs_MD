@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>11_7_19</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="day-32-of-summer-internship">Day 32 of Summer Internship</h1>
+<p><em>Date: July 11th, 2019</em></p>
+<p>Yesterday, after I showed my full documentation to my head he asked me about the time it takes for the code to process a mail. And though my earlier testing have revealed almost instant results, he wanted some concrete numbers. So today I searched how to note time in python and found the <a href="https://docs.python.org/3/library/datetime.html"><code>datetime</code></a>. Using this module, you can find the current time as an output of <code>datetime.now().time()</code> but it seems that two <code>datetime.time</code> objects (the type returned by the time() method) can’t be subtracted!! So they can’t give me the difference between two times. So I had to get the full date and time with <code>datetime.now()</code> and then subtract them to get the time taken by my process. So now I was getting the time period but to print them to a file, I had to explicitly convert them to string. Upon testing, I got pretty good results!!! The mails were classified in less than a second.</p>
+<p>Now I looked at my todo list that I had kept in the documentation and remembered that I am yet to move the spam files in spam folder. As of now, I was just storing the results in a file without actually moving the files. For this, python has <a href="https://docs.python.org/3/library/shutil.html#shutil.move"><code>shutil.move</code></a> and it worked fine.</p>
+<p>I then thought of one shortcoming of my shell scripts. The <code>inotifywait</code> process once started as a deamon keeps running unless it is explicitly stopped and if multiple <code>inotifywait</code> processes are running on the same directory, then they report the same event multiple times. So imagine this scenario, do to some error, my python process has stopped. Now I rectify that error and execute my shell script to start the process. But the last one’s <code>inotifywait</code> is still running and reporting for events on the watch directory. So now for each event, there are two reports in the log file and python will process that file twice. Worst, if it is classified as spam then first time it will be moved and then second time python will give IOError. So I had to kill the previous <code>inotifywait</code> process before starting the new one. For this, I tried various things but finally settled with <a href="https://linux.die.net/man/1/pkill"><code>pkill</code></a>. But still, now I am killing all the <code>inotifywait</code> processes, which is a problem is the user is running <code>inotifywait</code> somewhere else for some other purpose. So I need to find a better way of killing the processes.</p>
+<p>I also looked for a way to document shell scripts using Doxygen. Doxygen doesn’t officially supports shell scripts and doesn’t provides any additional filter either. So I had to find one on my own. I found a <a href="https://rickfoosusa.blogspot.com/2011/08/howto-have-doxygen-support-bash-script.html">blog</a> and a <a href="https://github.com/Anvil/bash-doxygen">Github repo</a> but both are quite old. I tried using the repo but it just wasn’t working. And another thing that isn’t working are these guys database system:</p>
+<p><img src="https://imgs.xkcd.com/comics/exploits_of_a_mom.png" /></p>
+<p>And that’s why you don’t mess with programmers.</p>
+</body>
+</html>
