@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Review Period</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Review Period</h1>
+</header>
+<p>After the application period ends, there is a 1 month period in which the organisations review the applications and select the students. Since I had only 2 days to write the proposal, most of my interaction with Bernd and the FreeCAD community regarding this project happened in the review period.</p>
+<p>And to be honest, I was very naive during that time and so were my questions (which you can see <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=44705&amp;start=20">here</a>). I would ask anything and everything that would come to my mind. But hey, that’s how we learn! And I sure learned a lot!!</p>
+<h2 id="shifting-to-arch">Shifting to Arch</h2>
+<p>The first thing required was to install FreeCAD. I was using Kali Linux during those days and you need to add the <a href="https://launchpad.net/~freecad-maintainers/+archive/ubuntu/freecad-stable">FreeCAD PPA</a>(Personal Package Archive) but there was some issue with it. I then tried to compile FreeCAD (<a href="https://hacksd.wordpress.com/2018/06/03/cloning-and-compiling-freecad/">which I have done earlier</a>) but then Kali had both Python 2 and Python 3 so it was messing up. And then I took quite a courageos decision. I shifted to Arch Linux!!! I had installed it months ago when my Ubuntu got corrupted but only the command line interface was there so I had to upgrade, install and configure the graphical user interface. It took me 5 days to do everything and compile FreeCAD in my new Arch Linux. But shifting to Arch was a very good decision and I have loved Arch since then!</p>
+<h2 id="the-first-example">The First Example</h2>
+<p>Now that I had FreeCAD with me, it was time to start creating examples. It was already Apr 11 and the only contribution I had made was improving the wiki page that gives instructions to compile FreeCAD on Arch. The <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=19037">first example</a> given to me was quite simple. You have a hollow cylinder, you apply torque on it’s outer surface to make it rotate. Only that, there is no way to apply a torque in FreeCAD. But then, torque is simply rotational force. So you apply a force and then tranform the coordinate system to a cyliderical one, which results in torque. Simple right. With more questions and answers I started creating this example. The examples are completely in code, so that they can be run without any GUI (which is called FreeCADCmd). So I devised a simple but effective approach:</p>
+<ol type="1">
+<li>I get it the FreeCAD file having the example.</li>
+<li>I replicate it in GUI and record the <a href="https://wiki.freecadweb.org/Macros">macro</a>.</li>
+<li>Get the essential method calls and fit them into the example convention.</li>
+</ol>
+<p>For mesh, Bernd just created a <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=44705&amp;start=40#p388738">simple way</a> to export the mesh into a python module which is how we import the mesh into an example.</p>
+<p>Things were working slow but good. We had alread <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=44705&amp;start=40#p389398">resolved some bugs</a> because of this example. Parallely, I started working on another <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=20238#p157643">transform constraint example</a>. In this, we have a beam which is hinged on it’s two ends and we apply pressure from the bottom/top so that it bends a bit from the centre and the hinges rotate slightly.</p>
+<h2 id="additional-learning">Additional Learning</h2>
+<p>It was almost the end of April. Bernd suggested that we should create a GUI to open examples. This was indeed required as even I struggled initially to run the examples. The GUI was supposed to be built using Qt but I had never worked on it. Neverthless, it’s never a harm to learn something. In fact Bernd did the basic setup of the GUI and I had to add a tree view of the example (using <a href="https://doc.qt.io/qtforpython/PySide2/QtWidgets/QTreeWidget.html">QtTreeWidget</a>).</p>
+<p>But I had to get only that commit in which the GUI was setup. Those who know <a href="https://hacksd.wordpress.com/2019/02/28/using-git/">git</a> know that mergeing would get us everything. So for picking a particular commit, Bernd suggested me to use <a href="https://www.atlassian.com/git/tutorials/cherry-pick"><code>cherry-pick</code></a> which is quite a cool git feature.</p>
+<p>But then I faced issue with running the newly compiled FEM workbench. A library was missing! Strange! Because I could see that library in it’s right location but somehow FreeCAD was not able to find it. After some searching, I found a really cool debugging tool for missing libraries which wsa <a href="https://codeyarns.com/2015/12/16/how-to-view-hierarchy-of-shared-library-dependencies-using-lddtree/">lddtree</a>. So building a tree of all the libraries revealed that one of the packages was not upgraded. And indeed it was an <a href="https://aur.archlinux.org/">AUR</a> package which means that it’s my reponsibility to upgrade it. [TIP for Arch Users: Check for upgrades of your AUR packages right after you upgrade the normal packages].</p>
+<p>April was over by the time I started working on the ExampleGUI.</p>
+<p>But you know, working on GUI is not easy: <img src="https://external-preview.redd.it/flqgQ0UEPRR8WLjZPdMnKZxLjKDkQpsFx70IlAitwsE.jpg" alt="working on GUI" /></p>
+</body>
+</html>
