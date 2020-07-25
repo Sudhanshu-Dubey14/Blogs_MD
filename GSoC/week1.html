@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 1</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 1</h1>
+</header>
+<p>The results were announced on May 4th and from then to June 1 was the Community Bonding Period. Which means that you need to interact with the mentors, with the organisation and get to know how they work. But we had done this already during the review period so we continued working. When the results were announced, it was all happy and merry with the congratulations but just after that things got serious!</p>
+<h2 id="rebasing">Rebasing</h2>
+<p>The first thing Bernd asked me to do was to rebase my branch with FreeCAD’s master branch. There is this line he likes to use: “git rebase is your friend.”. It surely isn’t easy to befriend git rebase. The first time I did it, it completely messed up my local as well as GitHub branch. I had to check the <a href="https://www.atlassian.com/git/tutorials/rewriting-history/git-reflog">reflogs</a> and hard reset evreything. * sigh * Oh by the way, <a href="https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase">git rebase</a> means you change the “base” of your branch to the “head” of another branch. Simple right. Nah, I won’t go in much detail here. That’s reserved for the git related blogs. But yeah, with more practice I can now say that me and rebase have become very good friends. It helps me rewrite the commit history in any way I want. So yeah, you should definitely send it a friend request as soon as possible.</p>
+<p>I had to setup a <a href="https://wiki.freecadweb.org/User:Sudhanshu_Dubey">user page</a> and <a href="https://wiki.freecadweb.org/User:Sudhanshu_Dubey/GSOC20/logs#TODO">logs</a> to get things started officially.</p>
+<h2 id="the-example-gui">The Example GUI</h2>
+<p>Now this was the first major task, to get the GUI up and running. What we had before the results was just a list of the examples. You couldn’t click to set them up. Before we could implement that, some refactoring was required. Some modules had more than one examples in them. Also we had to standardise a way to run the example. After some dicussion, we came with the idea to have only one example in a module and to have a method <code>setup()</code> in every example which would setup the example. So with more work in Qt, we implemented a list of all the examples and you can set them up with a single click. Cool.</p>
+<p>This marked the end of the first week and my major learning in this week was git rebase and Qt. But honestly I was still struggling with rebase during the whole week. Git is all fun and good unless you start getting conflicts. And what do you do when you get conflicts, well:</p>
+<figure>
+<img src="https://imgs.xkcd.com/comics/git.png" alt="" /><figcaption>git</figcaption>
+</figure>
+</body>
+</html>
