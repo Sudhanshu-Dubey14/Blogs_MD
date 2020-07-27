@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 2</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 2</h1>
+</header>
+<p>So after having a basic GUI to list all the examples, we had to catergories them based on their properties. The properties of a FEM example include:</p>
+<ol type="1">
+<li>Constraints: The type of <a href="https://wiki.freecadweb.org/FEM_Module#Electrostatic_Constraints">constraints</a> being used in the example.</li>
+<li>Equations: What is the type of equation (mechanical, thermal, electrostatic, etc) being solved in the example.</li>
+<li>Materials: The type of <a href="https://wiki.freecadweb.org/FEM_Module#Materials">material</a> the model in the example is made of.</li>
+<li>Mesh: What is the shape of the <a href="https://wiki.freecadweb.org/FEM_Mesh#Mesh_elements_in_FreeCAD">elements</a> of the <a href="https://wiki.freecadweb.org/FEM_Mesh">mesh</a>.</li>
+<li>Solvers: Which <a href="https://wiki.freecadweb.org/FEM_Solver">solvers</a> present in FEM workbench can solve the example.</li>
+</ol>
+<p>For getting these information from the examples, we decided to add a convinience method <code>get_information()</code> which would return us a dictionary containing all the information of the example. But there was a catch here! To use this method, I would need to import the example modules. And while this can be as simple as <code>from example import get_information</code> we can’t do that. Why? Cause the list of examples is meant to grow so it has to be dynamic. Also, the simple way would require us to think of unique names for the <code>get_information</code> of each example which is a tedious task. So I searched and found that we can dynamically import modules using <code>importlib</code> package. Further we can use <code>getattr()</code> method to get the method from a module and execute it. Thus, we built a GUI that dynamically loads all the examples that have a <code>get_information</code> method, classifies and displays them. This removes the need to register any new example and also simplifies the testing of an example during it’s making. It was quite a satisfaction to make this GUI.</p>
+<p>Besides that, nothing much happened. I finally got the rebase right. And the hinged beam example I mentioned earlier was completed (yet to be tested). Major learnings would be <code>QTreeWidgetItem</code>, <code>importlib</code> and <code>patience</code> :).</p>
+<p>And with no relation to this post, here is a nice xkcd:</p>
+<p><img src="https://imgs.xkcd.com/comics/metamaterials.png" /></p>
+<p>By the way, how many of you knew that there is a site only to <a href="https://www.explainxkcd.com/wiki/index.php/1351:_Metamaterials">explain xkcds</a>!!!</p>
+</body>
+</html>
