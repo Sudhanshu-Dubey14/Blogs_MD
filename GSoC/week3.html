@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 3</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 3</h1>
+</header>
+<p>So now that two examples were ready, it was time for some testing. And by testing, I mean <a href="http://softwaretestingfundamentals.com/unit-testing/">unit testing</a>. So I need to only test the working of a single unit, which here is an example. There is already a <a href="https://github.com/FreeCAD/FreeCAD/blob/master/src/Mod/Fem/femtest/test_information.md">testing framework</a> for the FEM workbench. For examples, the testing idea is simple. Beside testing that the example can be imported successfully, which means that the model is correctly made, the constraints are correctly applied and the mesh is proper, we create the input file for the solver and compare it with a pre-generated input file. This follows the general idea of testing that the generated outcome (the generated input file here) matches the expected outcome (the pre-generated input file).</p>
+<p>So I followed the procedure and created unit tests for the two examples. The tests passed (as there was an ‘OK’ in the end) but I got this ‘error’ message: <code>A finite mesh without a link to a Shape was given. Happen on pure mesh objects. Some methods might be broken.</code></p>
+<p>I asked Bernd about this and he said that this should be warning and that it’s only important if the mesh is a 1D mesh. But our models are 3D and so are our meshes. You might also have noticed that the error message is saying that it ‘happens on pure mesh objects’ and indeed we were creating pure mesh objects because all of the other examples were using pure mesh objects too. Now as far as I know, there are 3 type of mesh objects:</p>
+<ol type="1">
+<li>Pure mesh: This are native mesh object of FreeCAD and are be used when creating mesh <a href="https://wiki.freecadweb.org/FEM_Mesh#Scripting">manually using scripting</a>.</li>
+<li><a href="https://wiki.freecadweb.org/FEM_MeshGmshFromShape">Gmsh mesh</a>: This is the mesh object created by Gmsh software.</li>
+<li><a href="https://wiki.freecadweb.org/FEM_MeshNetgenFromShape">Netgen mesh</a>: This is the mesh object created by Netgen software.</li>
+</ol>
+<p>The reason we were using pure mesh object in examples because we have the mesh as a python module (as I mentioned earlier), some of which were created manually by Bernd. But since now we had the method to simply export a mesh to a python module, Bernd suggested me to replace the pure mesh object with a Gmsh mesh object. This would remove the error message and it did. Later on, I changed the mesh object to Gmsh mesh object in all the examples.</p>
+<p>So with this, I had done the first testing of examples in FEM which in itself was the major learning. But you are not always lucky to pass the unit tests. What do you do then?</p>
+<p><img src="https://pcweenies.com/wp-content/uploads/2013/09/2013-09-23_pcw.jpg" /></p>
+</body>
+</html>
