@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 5</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 5</h1>
+</header>
+<p>Yeah yeah, I skipped week 4. I know. That’s because nothing much happened in that week. Bernd was busy with some heavy FEM development. And so I didn’t had much to do. I did made some improvements in the Example GUI. Used a dictionary to map the example module names with their names in the get_information() method. Thus the GUI will now show the example names rather than the example module names. This is just for a better readibility and understandability of the user. Ah well, week 4 was the last week of the Community Bonding Period and so coding isn’t really expected in that period. Hence we are good with a little less coding.</p>
+<p>But this week marked the start of June and the First Coding Period and it sure was one busy week.</p>
+<h2 id="elmer">Elmer</h2>
+<p>At the very first day, HoWil (my second mentor for this GSoC, third bieng kkremitzki) gave me the first Elmer example to make. <a href="https://www.csc.fi/web/elmer">Elmer</a> is one of the three FEM solvers that are integrated within FreeCAD. So for running an Elmer example, I would obviously need Elmer to installed on my system. Now on Arch Linux, Elmer is available as an AUR package as <a href="https://aur.archlinux.org/packages/elmerfem/"><code>elmerfem</code></a> and as <a href="https://aur.archlinux.org/packages/elmerfem-git/"><code>elmerfem-git</code></a>. <code>elmerfem</code> uses the latest release from <a href="https://github.com/ElmerCSC/elmerfem">Elmer’s GitHub repo</a> to build the package whereas <code>elmerfem-git</code> (as the name suggests) uses the default branch from the repo to build the package. Thus, <code>elmerfem-git</code> will always have a more recent code than <code>elmerfem</code>, though that also makes it more unstable. So anyway, I tried to install <code>elmerfem</code> but faced an issue with I <a href="https://aur.archlinux.org/packages/elmerfem#comment-749033">reported to the maintainer</a>. No even before I encountered that issue, I faced issues with the dependencies of this package. For examples this <a href="https://aur.archlinux.org/packages/mmg/#comment-748837">issue with mmg</a> where I had to apply a patch on the fly as guided by the maintainer. Then I couldn’t install <a href="https://www.archlinux.org/packages/community/x86_64/paraview/"><code>paraview</code></a> because it conflicts with <code>vtk</code> which is required by <code>opencascade</code> which is a dependency of FreeCAD itself. So I tried <a href="https://aur.archlinux.org/packages/paraview-git/"><code>paraview-git</code></a> but I <a href="https://aur.archlinux.org/packages/paraview-git/#comment-748836">an error</a> in that too. So finally I had to install <a href="https://aur.archlinux.org/packages/paraview-opt/"><code>paraview-opt</code></a> building which is a really cumbersome job because paraview a really big software. * sigh * And what do I get after all that? The issue in <code>elmerfem</code>. * sigh <em> Anyway, I went for <code>elmerfem-git</code> and installed all of it dependencies too. But then there was a package <code>trilinos</code> in dependencies which <a href="https://aur.archlinux.org/packages/elmerfem-git/#comment-749396">refused to get installed</a>. </em> sigh *</p>
+<p>So after all that trouble, I reached out to the developers of Elmer with the <a href="https://github.com/ElmerCSC/elmerfem/issues/231">issue with <code>elmerfem</code></a> and with their help and suggestion I built it up from the very source. It took me around 3 days to finally get Elmer in my system. But the experience was rewarding!!! Not only did I learned more about the packaging of AUR packages and how I tinker with them, I got to creat one of my first issue of a big project and interact with the developers.</p>
+<h2 id="the-electrostatic-example">The Electrostatic Example</h2>
+<p>The example given to me initially was solving an electrostatic equation. In fact a standard example from the Elmer tutorials (page 29 of <a href="https://www.nic.funet.fi/index/elmer/doc/ElmerTutorials_nonGUI.pdf">this pdf</a>). Out of the three solvers we have, Elmer is the only one capable of solving electrostatic equations. Till now, we were only doing mechanical examples, whose results can be visualised quite easily. But now eith electrostatics, it will be fun to visualise the results. This is also because Elmer results have quite a few visualisation options in FreeCAD. For example, this is one way to visualise the result of the example we are talking about here:</p>
+<p><img src="elmer_elec_visual.png" /></p>
+<p>These results are not correct, but they are visually appealing.</p>
+<p>And since Elmer only supports Gmsh mesh object, on Bernd’s suggestion, I changed all the examples’ mesh to a Gmsh object. With Elmer coming in focus, there were other changes too, like adding the proper equations in those examples which support Elmer. But this was done slowly as we had to verify the results too.</p>
+<h2 id="the-manager-module">The Manager Module</h2>
+<p>Also in this week I was introduced to the manager module, which has the code to programmatically solve an example. So Bernd asked that I register (make methods for) the new examples in the manager module and if we could integrate it with the Example GUI, thus we will have a ‘Run’ button to have an example solved. When I first tried to use it, I got an error which we resolved <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=44705&amp;start=170#p406496">here</a>.</p>
+<p>And while we solved an issue, looks like a mystery was solved here:</p>
+<p><img src="https://imgs.xkcd.com/comics/mystery_solved.png" /></p>
+</body>
+</html>
