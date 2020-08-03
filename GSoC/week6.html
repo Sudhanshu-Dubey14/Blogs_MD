@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 6</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 6</h1>
+</header>
+<p>The week started with me integrating the manager module with the example GUI. So now there was a ‘Run’ button usling which you can get an example automaticaly solved. Also last week, Bernd had given me some examples which he had written around a year ago in his <a href="https://gitlab.com/wartburgritter/fcusermod/-/tree/master/FEMExamples">GitLab repo</a>, so I had a look at them and selected 4 examples which were already not here in FreeCAD.</p>
+<p>Then I started working on the electrostatic example of Elmer. The model of this example was different then other examples on which I have worked as it was made using the <a href="https://wiki.freecadweb.org/Sketcher_Workbench">Sketcher</a> workbench and not the <a href="https://wiki.freecadweb.org/Part_Module">Part</a> workbench. Essentially, I used Sketcher from inside the <a href="https://wiki.freecadweb.org/PartDesign_Workbench">PartDesign</a> workbench. But this was my first time using Sketcher. What you can do in Sketcher is make a sketch and then apply the required constraints to fit it to your requirements. Then in PartDesign you give your 2D sketch a 3rd dimension by extruding it. And boom, you have a 3D model ready. Though it isn’t that easy to programme the model using Sketcher, and it isn’t even recommended by Bernd. But then we didn’t had any example made in Sketcher and so I went with this difficult option cause learning is fun!</p>
+<h2 id="backstory-of-the-example">Backstory of the Example</h2>
+<p>Coming from the Elmer tutorials, this example has a bit of backstory. The motivation of the case actually comes from <a href="http://www.eeherald.com/section/design-guide/mems-microphone.html">MEMS microphone</a>. These are electronic microphones that are increasingly being used in your phones and laptops.</p>
+<p><img src="https://eeherald.s3.amazonaws.com/uploads/ckeditor/pictures/oldarticleimages/memsmicrophone2.jpg" alt="MEMS Microphone" /> <img src="https://eeherald.s3.amazonaws.com/uploads/ckeditor/pictures/oldarticleimages/memsmicrophone3.png" alt="Detailed Diagram" /></p>
+<p>You see that hole in the back-plate? We are studying a symetric quarter of that hole in this example. And so, everything in our model is just air!!! Yes, even though it might look like a solid model but we have kept it’s material as air. So at the end, we are interested in finding the electric force in that environment due to the potential difference.</p>
+<h2 id="defining-air">Defining Air</h2>
+<p>So now that we know that our material is air, we need to define it in our example. Yeah for some reason, we don’t use the predefined materials in FreeCAD like we do in the GUI. But anyway, I used the values of “Air-Generic” to define my air for the example but when I tried to run it I got error stating that units of <code>VolumetricThermalExpansionCoefficient</code> and <code>ThermalExpansionCoefficient</code> are wrong. So I had to search the net for them and add the correct value and unit of these quantities for air. But even after that, Elmer wasn’t picking it up and saying that there are no materials defined!</p>
+<p>And that’s how the week ended, with me unable to correctly define the most common thing around us. Oh you think air is simple, then explain this comic to me:</p>
+<p><img src="https://imgs.xkcd.com/comics/ground_vs_air.png" /></p>
+<p>I knew you couldn’t, so let’s just visit <a href="https://www.explainxkcd.com/wiki/index.php/2242:_Ground_vs_Air">explain xkcd</a> <em>cause we all are dumb</em>.</p>
+</body>
+</html>
