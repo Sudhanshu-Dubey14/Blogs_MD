@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 7</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 7</h1>
+</header>
+<p>While we were waiting a reply from HoWil to resolve the issue with the electrostatic example, Bernd gave me another example to work on. This was regarding a new constraint that was being added in FEM workbench. The constraint is called “section print”. And when you apply this constraint on a section in the model, you the results for that section apart from the general FEA results. For example, this is the example we built for this constraint:</p>
+<p><img src="section_print_model.png" /></p>
+<p>So as you can see, there is a section in this arc like model. So by applying the section print constraint we will get addtional info about that section, in our case forces, moment about the origin, etc etc. Thus, with this new constraint you can get a deeper insight into the <del>stimulated</del> physics that’s at work.</p>
+<p>Also, this example was also built with sketcher but it was simpler. So within 2 days I was ready with this example but there was some error with implementation which I left for Bernd to resolve.</p>
+<h2 id="defining-air">Defining air</h2>
+<p>So as I said in last post, our definition our air wasn’t complete and so Elmer solver wasn’t picking it as a material. Guess what was missing? Relative Permittivity! This is the property that shows how easily can a material be polarised, compared to vaccum. Quite an essesntial electric property of a material. Thus it was required to define this for the problem to be completely defined and be solvable. And surely the example was getting solved and the capacitance result was coming good.</p>
+<p>As for testing, I wasn’t sure initially cause Elmer was creating a lot of input files unlike the single file created by Calculix. HoWil did tell me that it’s the .sif (Solver Input File) that’s most important but I decided to wait for Bernd as the test framework for ELmer examples wasn’t ready yet.</p>
+<h2 id="bimetall-example-in-elmer">Bimetall example in Elmer</h2>
+<p>Out of his good habit, HoWil remind us of the first GSoC evaluation 10 days before the start of it. The he compiled my branch and gave some good suggestions for the improvement of the ExampleGUI. Then he tried to make the <code>thermomech_bimetal</code> example be solvable using Elmer. In this example, we basically have 2 strips of different metals (Copper and Invar here) and we heat them from one end. Then we see the displacement caused by their different thermal properties. In his first attempt, HoWil got good results though not exact ones:</p>
+<p><embed src="https://forum.freecadweb.org/download/file.php?id=118528" /></p>
+<h2 id="boxes-with-multiple-materials">Boxes with Multiple Materials</h2>
+<p>The first example I got from Bernd’s old collection was this multmaterial bending beam one. The idea is simple. We have 5 boxes, made of 3 materials. We put them in line with the material order being <code>3 2 1 2 3</code>, fix the boxes on both ends and apply same force on top of all of them. The result is also simple to visualise. The deformation would be highest in the centre and decrease as we go towards the edges:</p>
+<p><embed src="https://forum.freecadweb.org/download/file.php?id=118650" /></p>
+<p>Bernd had already done most of coding so it was easy to get this one.</p>
+<p>The next example from Bernd’s collection I tried was called edge_load_calculation and I got error while trying to build it but more on it in the next post. By this time, Bernd was back from his vacation and so it was time for some rebasing again.</p>
+<p>Pretty sure Bernd would have liked another vacation, only if he had a time machine:</p>
+<p><img src="https://imgs.xkcd.com/comics/low_background_metal.png" /></p>
+</body>
+</html>
