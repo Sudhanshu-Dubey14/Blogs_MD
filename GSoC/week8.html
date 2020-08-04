@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 8</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 8</h1>
+</header>
+<p>So the <code>edge_load_calculation</code> example that I mentioned in the last post has a 2D geometry, in fact it’s a square pipe:</p>
+<p><img src="edge_load_with_z88_model.png" /></p>
+<p>As you can see in the picture, the simple idea is to apply forces on the edges of one side in a rotational manner and to kepp the edges of the other side fixed. This will obviously give the pipe a twist. There is another for having this example other than analysing the result of the twist, but we will discuss them in later posts. So as I was saying, this is a 2D model and Calculix told me that loud and clear with this error message:</p>
+<p><img src="no_volume_error.png" /></p>
+<p>Now obviously I am not expecting there to be any volume in a 2D model and so no volume elements in the mesh. As per the error message we need to define a <a href="https://wiki.freecadweb.org/FEM_ElementGeometry2D">shell thickness</a> and for that Bernd showed me another FEM example which was using the shell thickness. So I went ahead and defined a shell thickness of 15mm so that now our model is a very thin 3D model. With this, we were done with this example for now.</p>
+<h2 id="rewriting-history">Rewriting History</h2>
+<p>Bernd was not looking to start getting my work in FreeCAD’s master branch, which would make me an official FreeCAD developer. For that he took my branch and rewrote the history to have only the essential and meaninful commits. I was quite impressed with that and asked him how he did that. And to my surprise his answer was a git command that I had recently learned; <strong><code>git rebase</code></strong> But, the interactive one. You <a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">rewrite history</a> using interactive rebase.</p>
+<p>After I had rebased my new work on the new clean branch he made, on 23rd July 2020, I became an <strong>Official FreeCAD Developer</strong>. By the end of this week, I had also got the hang of rewriting my commit history.</p>
+<h2 id="shells-with-multiple-materials">Shells with Multiple Materials</h2>
+<p>On a similar note to the Boxes with Multiple Materials, Bernd had this Shells with multiple materials example. The only difference between the two is that this one is a 2D model while the previous one was a 3D model. The results are also similar:</p>
+<p><img src="multibody_analysis_faces.png" /></p>
+<p>And obviously there is a shell thickness of 10mm for proper meshing.</p>
+<h2 id="making-the-manager-module">Making the Manager Module</h2>
+<p>After generating a new example, it was needed to register it in the manager module so that it can be solved automatically. Now by register here, I mean creating a method for that example. But there was a certain pattern in all the methods:</p>
+<ol type="1">
+<li>They would import the specific example.</li>
+<li>Run the <code>setup()</code> method to have the example ready.</li>
+<li>Call the method <code>run_analysis()</code> to run the example and get results</li>
+</ol>
+<p>Taking inspiration from the recent use of <code>importlib</code> that I had done to build the examplegui, I made a single method to replace all the example specific method. In this method, you would pass the name of the example module and then it will perform the above three steps to get you the results. With this method in place, now there was no need to register a new example which removed 1 step from the list of steps to perform for creating a FEM example.</p>
+<p>By the time this method was merged in master, the first coding period had ended and it was time for the first evaluations!</p>
+<p>So since we talked a bit about 2D and 3D, how about a 3D movie:</p>
+<p><img src="https://imgs.xkcd.com/comics/3d.png" /></p>
+<p>Didn’t get it? How about some <a href="https://www.explainxkcd.com/wiki/index.php/848:_3D">explaination</a>? Or just watch this <a href="https://xk3d.xkcd.com/848/">comic in 3D</a>!</p>
+</body>
+</html>
