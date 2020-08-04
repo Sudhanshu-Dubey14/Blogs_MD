@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 9</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 9</h1>
+</header>
+<p>I passed the first evaluation of GSoC 2020 and as July started, I was given a new example to work on. This was another from the <a href="https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerTutorials.pdf">Elmer tutorials</a> (page 28) and another example of electrostatics. This was another visually appealing example. And as always, the idea is simple. You have two small perfectly conducting balls in free space. To simulate this free space, we make a larger sphere around the smallspheres and give it the property of air. The two balls have a voltage difference between them, which results in electric charge being introduced in the system. The model looks like this:</p>
+<p><img src="two_balls_model.png" /></p>
+<p>But when I opened the file created by HoWil, it crashed my FreeCAD with a <a href="https://en.wikipedia.org/wiki/Segmentation_fault">segmentation fault</a>. This usually happens when the software tries to access a memory address not allocated to it. I later found out that the culprint was the post processing plane. So because of the crash, I wasn’t properly able to analyse this example. So Bernd suggested me to use FreeCADCmd, the command line version of FreeCAD with only the python console, to extract the required information. This was a cool idea and I was finally able to get the example coded, though there were errors with mesh and I had to later set the vaccum permittivity to <code>1 F/m</code> using the newly developed <code>ConstantVaccumPermittivity</code> object.</p>
+<h2 id="errors-in-beam-hinged-example">Errors in Beam Hinged Example</h2>
+<p>Remember the beam hinged example we made in the initial days? Yeah the second example. When Bernd tried to run it, he found that the faces were wrongly assigned. So he corrected that and sent me a pull request. But when I tried to test his PR, I found that the faces were wrongly asigned in his PR and were correct in my example. It looked as if the names of the faces were changing dynamically cause it’s name we use to assign constraints. We resolved this issue later on.</p>
+<h2 id="z88-testing-framework">Z88 Testing Framework</h2>
+<p>Bernd had recently improved Calculix’s testing framework and was working on Elmer’s testing framework. This left the third solver, Z88 for me. The idea was to take inspiration from Calculix’s testing framework and create one for Z88. Cool. It wasn’t really required, but I decided to install Z88 cause that way I can even test the results of the example that it can run.</p>
+<p>To my surprise, there was no package for Z88 in Arch Linux. Not even as an AUR. So I had to get to their <a href="https://github.com/LSCAD/Z88OS">github repo</a>. To my bigger surprise, it’s a rather old and unmaintained repo. Especially the way they have different Makefiles for Windows, Linux and Mac. It would be better to use CMake. Well, one of these days I am going to contribute that to them and that’s whhy I joined their Forum. Well that’s the good thing about open-source softwares though there is the related danger too:</p>
+<p><img src="https://imgs.xkcd.com/comics/open_source.png" /></p>
+<p>(Trivia: <a href="https://blog.xkcd.com/2007/04/19/life-imitates-xkcd-part-ii-richard-stallman/">xkcd fans gifted an actual katana to Richard Stallman</a>)</p>
+</body>
+</html>
