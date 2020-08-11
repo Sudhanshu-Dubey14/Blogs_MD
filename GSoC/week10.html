@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 10</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 10</h1>
+</header>
+<p>This week started with me implementing the z88 testing framework. But there was a catch here. Z88 has a number of input files and all are significant. One has the mesh, the other has solver properties, etc. Now why is this important? Because calculix has only one input file called <code>mesh.inp</code> which has everything the solver needs. And while elmer does have a number of input files, only the <code>case.sif</code> file is important for testing. So in the testing framework, we can simply compare these respective files but that can’t be done with z88. All the files need to be compared. And how do you do a task repeatitively in programming? Loop of course. So I looped over the given input files and compared them with the generated input files as a test. Though this would mean that unlike the calculix or elmer test where the given input file is saved with the name of the example, in case of z88, the directory having the given input files needs to have the name of the example while the files in it need to have their standard names.</p>
+<p>Also, for initial testing I was told to use the “box static analysis” example but later we realised that z88 can’t solve this example. Why? Cause z88 can only handle the fixed and force constraints but this example has pressure constraint. Ah but strangely, the test for this example using z88 did passed. How? Cause it’s a bug in z88’s writer module of FEM workbench that it won’t give warning for unsupported constraints. I have decided to solve this bug after GSoC. So anyway, we used the standard cantilever faceload example for the basic testing. Later on, I added tests for all the examples that z88 can solve which are only a few currently.</p>
+<p>And to further decrease that few number of examples solvable with z88, we found that the <code>edge_load_calculation</code> example (though having only the fixed and force constraints) is not solvable by z88. Why? The input file writing operation is never finished!! Strange right. That’s a bug we need to fix.</p>
+<p>One last bug in z88 that we discovered was it was giving zero displacement for the cantilever faceload example. Well it was calculating the displacements but we can say that it wasn’t showing them, hence the zero displacement results. Bernd quickly fixed it though.</p>
+<h2 id="example-gui-improvements">Example GUI improvements</h2>
+<p>So the first issue with the example GUI was that no matter how you open examples, they would open with the <code>ccxtools</code> (calculix) solver. Even if you go to the ‘Solver’ submenu and open an elmer example, it would have <code>ccxtools</code> solver. This isn’t the expected behaviour. So I added some checks for seeing if the user is selecting examples from the “Solver” submenu. This was done in <a href="https://github.com/Sudhanshu-Dubey14/FreeCAD_sd/commit/07f81c14cfee785dc70cbf60c476246ee4211f18">this commit</a>. Being python, it should be easy to understand the changes which helped me implement this feature.</p>
+<p>Another improvement was to change the “cancel” button to “close” button. Now “cancel” is a standard button in Qt so its very easy to add it. But for “close”, I had to add a new button, add it’s icon and add a reject signal to it (Yeah Qt works using signals and recievers).</p>
+<h2 id="selfweight-example">Selfweight Example</h2>
+<p>I got another example to work on in this week. As always, it was a simple example. No really, it was. A 33m long beam (cantilever) of steel getting deformed under it’s own weight. Quite a real world example, right. This is how the result should look:</p>
+<p><img src="elmer_self_weight_direct.png" /></p>
+<p>At first, since it’s a cantilever example, I built it as a derivative of the cantilever faceload. But then Bernd advised me to build it as a separate example cause it’s a 33m long cantilever, unlike the other cantilever examples. Initially the results with Elmer were wrong. But we created a <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=48513&amp;start=20">separated thread</a> and it was finally found that changing the <code>Linear Solver Type</code> from <code>Iterative</code> to <code>Direct</code> gave correct results. Raback, one of the developer of Elmer, told us that this might be because the iterative method may not be able to converge so it’s better to use the direct method for simple examples like this one.</p>
+<p>And out of nowhere is a time travel comic:</p>
+<p><img src="https://imgs.xkcd.com/comics/terminator_dark_fate.png" /></p>
+</body>
+</html>
