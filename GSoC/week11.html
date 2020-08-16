@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 11</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 11</h1>
+</header>
+<p>Working more on Elmer this week, we found some issues with examples that Elmer should be able to solve.</p>
+<p>The first one was the <code>cantilever_nodeload</code> example. It is similar to the <code>faceload</code> example, except that here the force is appiled on nodes/vertecies/corners. Now since the examples are similar, the results should be similar if not exact same. But we found that this was not happening. In fact, Elmer was giving zero deformations!!</p>
+<p><img src="elmer_nodeload_displacement.png" /></p>
+<p>For resolving this, we again opened a <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=48605">separate thread</a> but this issue hasn’t been resolved as of yet.</p>
+<p>Secondly, we also tried to correct the <code>thermomech_bimetal</code> example which HoWil tried to solve with Elmer during the <a href="week7.md">7th week</a>. We created another <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=48625">new thread</a> for this where it was told by HoWil that we can obtain the correct results by changing the <code>Linear Solver Type</code> from <code>Iterative</code> to <code>Direct</code> (again) and by giving the <code>Heat</code> equation more priority than the <code>Elasticity</code> equation. Now here <code>Heat</code> equation is meant to tell Elmer how to calculate the temparature distribution in the model and the <code>Elasticity</code> equation will tell Elmer how to calculate the deformations. Thus, giving more priority to <code>Heat</code> means that we are asking Elmer to calculate the temparature distribution first and the deformations later. And well that makes sense as the deformation is the result of the differential heating of the two rods.</p>
+<h2 id="node-loads-on-square-pipe">Node Loads on Square Pipe</h2>
+<p>Remember the <code>edge_load_calculation</code> example that I made during the <a href="wee8.md">8th week</a>? And I said that there is another way to get the twist. So similar to the difference between the faceload and the nodeload, we have the edge load and node load. Which means that all the forces that we applied on the edges of that example, we will apply on the nodes/points of this example. Also, we will use the same mesh for both the examples. And if the results of both the examples are really exactly same, this would indicate that our implementation of mesh tools and line loads are working perfectly fine.</p>
+<p>But making this example wasn’t easy. First off because the icons of the force and fixed constraints become really small when applied on a point. In fact they change size according to the object on which they are applied. For points, they almost become point size. This below is a really, really zoomed in view:</p>
+<p><img src="screen.png" /></p>
+<p>This in fact is a long time standing bug in FreeCAD. I may try to see why it hasn’t been resolved till now. Now the 4 forces (1 per edge) of the edgeload were divided into 12 forces (3 per edge) in the nodeload. Also each force in the edgeload was 1,00,000N and for nodeload this was divided into forces of 66666.67N, 27777.78N, 5555.56N (add them up and you will get 1,00,000N). This was done cause we need to apply more force on the inner nodes of the edge then the corner nodes. Remember that our goal is to replicate the edgeload by applying appropriate loads on the nodes. So each edge was divided into 13 nodes. On both the corner nodes a force of 5555.56N was applied. Coming in, we apply 66666.67N and 27777.78N on 6 and 5 nodes respectively and alternatively. The direction of all these forces is kept parallel to the edge and in such a way that it creates the twisting effect we want.</p>
+<p>But even then, because of the almost invisible icons of forces it was really difficult to get them all in the correct place and direction. I couldn’t just replicate the file given by Bernd because the names of the edges were not same. Hence for this example, for the first time during GSoC, I had to take out a pen and paper and do things manually.</p>
+<p>So this was the toughest example till date, mostly because of the tiny size of force icons but then the results are coming off pretty nicely:</p>
+<p><img src="nodeload_results.png" /></p>
+<p>By this time if you are asking what does <code>xkcd</code> mean, well here is the author’s answer:</p>
+<p><a href="https://www.explainxkcd.com/wiki/index.php/207:_What_xkcd_Means"><img src="https://imgs.xkcd.com/comics/what_xkcd_means.png" /></a></p>
+</body>
+</html>
