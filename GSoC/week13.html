@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 13</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 13</h1>
+</header>
+<p>The week started with more improvements in the example gui. The first one was enabling the double click cause we are all used to opening something by double clicking on it. In our case the double click would be equivalent to clicking “setup”. Then I also added the “wait cursor” using the <code>setOverrideCursor</code> of Qt. This is the “waiting” symbol that comes when a process is going on. What used happen before this was that when you would open the example gui or any example, the mouse would just be like a normal arrow cursor giving the impression that FreeCAD has hanged. But after adding this, we properly get the waiting cursor. Further sorting of the second level of tree in the example gui was done.</p>
+<h2 id="drop-down-menu-for-meshers-and-solvers">Drop Down menu for Meshers and Solvers</h2>
+<p>Bernd predicted that he and HoWil may get a little too busy to be very active on this and so he asked if I can help with a side work and obviously I agreed to it. So on <a href="https://forum.freecadweb.org/viewtopic.php?f=18&amp;t=48733">another thread</a>, there was a discussion going on to change the icons for <a href="https://gmsh.info/">Gmsh</a> and <a href="https://ngsolve.org/">Netgen</a> mesher objects. Currently, both are separate items on the tool bar. As a result of the discussion, it was decided that we should have a global mesher icon of a drop down menu. And both the mesher would be part of the drop down menu. And a similar thing was suggested for the solvers too since they are also separate items right now. This is where my role came. I had to implement this.</p>
+<p>Originally, it was decided to be done in C++ as FEM currently has no drop down menu implementation in python. I tried C++ but the issue was that both the meshers’ and solvers’ commands are defined in python. So Bernd suggested me to do it in python itself, taking inspiration from drop down implementation in other workbenches. This was quite easy and was quickly done:</p>
+<p><img src="solvers_drop_down.png" /> <img src="meshers_drop_down.png" /></p>
+<p>But.. but there was an issue. Netgen is implemented differently in FreeCAD. Unlike Gmsh for which the binary path is given, Netgen is linked as a library during compile time itself. And so, if your FreeCAD isn’t compiled with Netgen (like my FreeCAD) then Netgen mesher won’t be shown in the tool bar or the menu bar. Now since we are talking about the compile time, this check of whether FreeCAD is compiled with Netgen or not is created as a <a href="http://www.cplusplus.com/doc/tutorial/preprocessor/">pre-processor definition</a> in <a href="https://cmake.org/">CMake</a>. To say simply, this check of FreeCAD with Netgen is in C++ and can’t be accessed in python. And so, I can’t condionally stop Netgen from showing up in the toolbar. Hence, even though this side work was completed, it couldn’t be merged just yet.</p>
+<p>And what else does C++ have that python doesn’t? Yeah, pointers:</p>
+<p><a href="https://www.explainxkcd.com/wiki/index.php/138:_Pointers"><img src="https://imgs.xkcd.com/comics/pointers.png" /></a></p>
+</body>
+</html>
