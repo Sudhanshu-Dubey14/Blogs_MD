@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GSoC Days: Week 15</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">GSoC Days: Week 15</h1>
+</header>
+<p>Another week, another example. This time it was the first one from the <a href="https://www.nic.funet.fi/pub/sci/physics/elmer/doc/ElmerTutorials.pdf">Elmer GUI Tutorials</a>, Heat equation - Temperature field of a solid object. The idea is simple here too, we have a solid object which is getting internally heated, i.e the source of heat is inside the object or the object itself. Additionally, there are fixed temparature on some boundaries/faces. And this how the result will look:</p>
+<p><img src="elmer_gui1_heat_results.png" /></p>
+<p>And no, sorry to ruin your hope like this but I can’t program such a complex geometry just yet. In fact not even the Elmer people have coded it. It is a step (.stp) file which is kindly provided at the AIM@SHAPE Shape Repository by INRIA. So I have just imported that file in FreeCAD. Then after applying all the relevnt constraints, assigning the material, meshing the model and solving the equations we get the result which was really close to the one mentioned in the tutorial. One strange thing about this example was that when I made a finer mesh, the result was incorrect. As in the the max temparature went higher than the correct one. This was strange because usually with a finer mesh you get a more accurate result but that also increases the size of the mesh. So thats a tradeoff you need to make between the file size and result accuracy.</p>
+<p>Apart from that, HoWil was ready with an implementation of the <code>freetextinput</code> in the laminar flow example to add custom boundary conditions. I tried to adapt that in my example and even though the results did improve but I think that they still didn’t matched with the results from the tutorial. Also, the <code>freetextinput</code> was not working properly when I used it with the FreeCAD standard mm/k/s units. Maybe some improvements were still required.</p>
+<p>And since we were studying heat earlier on, let’s have a look at the temparature timeline of the earth:</p>
+<p><a href="https://explainxkcd.com/wiki/index.php/1732:_Earth_Temperature_Timeline"><img src="https://imgs.xkcd.com/comics/earth_temperature_timeline.png" /></a></p>
+</body>
+</html>
